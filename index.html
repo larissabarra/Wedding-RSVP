@@ -1,70 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Sheets API with Apps Script</title>
+    <title>Read and Write to Google Sheet</title>
 </head>
 <body>
-    <h1>Google Sheets Data</h1>
+    <h1>Read and Write to Google Sheet</h1>
     
-    <!-- Fetch Data Form -->
-    <form id="fetchForm">
-        <label for="row">Row Number:</label>
-        <input type="number" id="row" required>
-        <button type="submit">Fetch Data</button>
-    </form>
-
-    <div id="sheetData"></div>
-
-    <h2>Update Google Sheet</h2>
-    <!-- Update Data Form -->
-    <form id="updateForm">
-        <label for="updateRow">Row:</label>
-        <input type="number" id="updateRow" required><br>
-        <label for="column">Column (A, B, C, etc.):</label>
-        <input type="text" id="column" required><br>
-        <label for="value">New Value:</label>
-        <input type="text" id="value" required><br>
-        <button type="submit">Update</button>
-    </form>
+    <div id="data"></div>
+    <input type="text" id="valueInput" placeholder="Enter value to write">
+    <button onclick="updateData(2)">Submit</button>
 
     <script>
-        // Fetch data from Google Sheets
-        document.getElementById('fetchForm').onsubmit = async function(event) {
-            event.preventDefault();
-            const row = document.getElementById('row').value;
-            const response = await fetch('https://script.google.com/macros/s/AKfycbyBYcqVMtQw34WYwm3Mow2L6ry4oD4DwAEeKzHpFA2ce6sfoIOfDII3wqfCsxZ_78fTFw/exec?row=' + row);
-            const data = await response.json();
-            const sheetDataDiv = document.getElementById('sheetData');
+        const webAppUrl = 'https://script.google.com/macros/s/AKfycbyBYcqVMtQw34WYwm3Mow2L6ry4oD4DwAEeKzHpFA2ce6sfoIOfDII3wqfCsxZ_78fTFw/exec';
 
-            if (data && data.length > 0) {
-                const rowData = data[0].join(' | ');  // Join array elements for display
-                sheetDataDiv.innerHTML = `<p>Data for Row ${row}: ${rowData}</p>`;
-            } else {
-                sheetDataDiv.innerHTML = '<p>No data found for the specified row.</p>';
-            }
-        };
+        function fetchData(row) {
+            fetch(`${webAppUrl}?row=${row}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('data').innerText = JSON.stringify(data);
+                })
+                .catch(error => console.error('Error:', error));
+        }
 
-        // Submit form to update Google Sheets
-        document.getElementById('updateForm').onsubmit = async function(event) {
-            event.preventDefault();
+        function updateData(row) {
+            const value = document.getElementById('valueInput').value;
 
-            const row = document.getElementById('updateRow').value;
-            const column = document.getElementById('column').value;
-            const value = document.getElementById('value').value;
-
-            const response = await fetch('https://script.google.com/macros/s/AKfycbyBYcqVMtQw34WYwm3Mow2L6ry4oD4DwAEeKzHpFA2ce6sfoIOfDII3wqfCsxZ_78fTFw/exec', {
+            fetch(webAppUrl, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: JSON.stringify({ row, column, value })
-            });
+                body: `row=${row}&value=${value}`
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Update success:', data);
+                fetchData(row); // Fetch updated data to display
+            })
+            .catch(error => console.error('Error:', error));
+        }
 
-            const result = await response.json();
-            alert(result.message);  // Notify the user of the update status
-        };
+        // Fetch data initially from row 2
+        fetchData(2);
     </script>
 </body>
 </html>
