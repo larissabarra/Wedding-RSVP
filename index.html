@@ -24,6 +24,7 @@
     // Parse the 'row' query parameter from the URL (used for the unique guest)
     const urlParams = new URLSearchParams(window.location.search);
     let row = urlParams.get('row');
+    console.log('Row parameter:', row); // Log row parameter to see if it's being read correctly
 
     // Google Apps Script web app URL
     const webAppUrl = 'https://script.google.com/macros/s/AKfycbwU-VX2Da5YC-CPp-jCml3p7wZlHFxnMTZfwTJ4h2XAXPsVItoDe_DplpBsPeYPWdrLVg/exec';
@@ -32,6 +33,7 @@
     if (row) {
       // If row exists, attempt to fetch guest data from localStorage or API
       const cachedData = localStorage.getItem('guestData_' + row);
+      console.log('Cached data for row:', cachedData); // Log cached data for row
 
       if (cachedData) {
         // If data is found in localStorage, use it
@@ -57,15 +59,29 @@
           });
       }
     } else {
-      // If 'row' parameter is missing, check if cached data exists in localStorage
-      const cachedData = localStorage.getItem('guestData_');
-
+      // If 'row' parameter is missing, check if cached data exists in localStorage for any row
+      console.log('No row parameter in URL. Checking localStorage...');
+      const cachedData = localStorage.getItem('guestData_'); // Looking for a generic key
+      
       if (cachedData) {
         const guestData = JSON.parse(cachedData);
         document.getElementById('greeting').textContent = `Hello, ${guestData.name}!`;
         document.getElementById('response').value = guestData.rsvp;
       } else {
-        document.getElementById('greeting').textContent = 'No row parameter provided, and no cached data found.';
+        // Ask the user to enter their guest ID or row number manually if no row is provided
+        document.getElementById('greeting').textContent = 'Please enter your guest ID or RSVP row number:';
+        document.getElementById('rsvpForm').innerHTML += `<input type="text" id="guestId" placeholder="Enter your ID" required> <button id="submitId">Submit</button>`;
+
+        // Handle the submission of guest ID
+        document.getElementById('submitId').addEventListener('click', function(event) {
+          event.preventDefault();
+          const guestId = document.getElementById('guestId').value;
+          if (guestId) {
+            // Store the guest ID in localStorage temporarily to make the API request
+            localStorage.setItem('guestData_', guestId);
+            window.location.href = `?row=${guestId}`; // Redirect with the row parameter
+          }
+        });
       }
     }
 
@@ -96,8 +112,4 @@
         .catch(error => {
           console.error('Error posting data:', error);
           alert('Failed to submit RSVP.');
-        });
-    });
-  </script>
-</body>
-</html>
+       
