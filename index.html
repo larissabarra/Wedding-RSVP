@@ -3,50 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google Sheets Data Fetcher and Editor</title>
+  <title>Wedding RSVP</title>
 </head>
 <body>
-  <h1>Google Sheets Data Fetcher</h1>
+  <h1>Wedding RSVP</h1>
   
-  <div id="result">Loading...</div>
+  <div id="greeting"></div>
 
-  <form id="updateForm">
-    <h2>Update Data</h2>
-    <label for="newValue">Enter new value for the row:</label>
-    <input type="text" id="newValue" name="newValue" required>
+  <form id="rsvpForm">
+    <h2>Please RSVP</h2>
+    <label for="response">Will you attend the wedding?</label>
+    <select id="response" name="response" required>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
     <input type="submit" value="Submit">
   </form>
 
   <script>
-    // Parse the 'row' query parameter from the URL
+    // Parse the 'row' query parameter from the URL (used for the unique guest)
     const urlParams = new URLSearchParams(window.location.search);
-    const row = urlParams.get('row');
+    let row = urlParams.get('row');
 
     // Google Apps Script web app URL
     const webAppUrl = 'https://script.google.com/macros/s/AKfycbwU-VX2Da5YC-CPp-jCml3p7wZlHFxnMTZfwTJ4h2XAXPsVItoDe_DplpBsPeYPWdrLVg/exec';
 
-    // Fetch data immediately when the page loads
+    // Check if the row parameter exists
     if (row) {
-      fetch(`${webAppUrl}?row=${row}`)
-        .then(response => response.json())
-        .then(data => {
-          // Display the fetched data
-          document.getElementById('result').textContent = JSON.stringify(data);
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-          document.getElementById('result').textContent = 'Failed to load data.';
-        });
+      // If row exists, attempt to fetch guest data from localStorage or API
+      const cachedData = localStorage.getItem('guestData_' + row);
+
+      if (cachedData) {
+        // If data is found in localStorage, use it
+        const guestData = JSON.parse(cachedData);
+        document.getElementById('greeting').textContent = `Hello, ${guestData.name}!`;
+        document.getElementById('response').value = guestData.rsvp;
+      } else {
+        // If no data in localStorage, fetch from Google Sheets
+        fetch(`${webAppUrl}?row=${row}`)
+          .then(response => response.json())
+          .then(data => {
+            // Assuming the data contains the guest's name and previous RSVP (e.g., columns A and B)
+            const guestData = { name: data[0][0], rsvp: data[0][1] };
+            document.getElementById('greeting').textContent = `Hello, ${guestData.name}!`;
+            document.getElementById('response').value = guestData.rsvp;
+
+            // Cache the guest data in localStorage for future visits
+            localStorage.setItem('guestData_' + row, JSON.stringify(guestData));
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+            document.getElementById('greeting').textContent = 'Failed to load data.';
+          });
+      }
     } else {
-      document.getElementById('result').textContent = 'No row parameter provided in URL.';
+      // If 'row' parameter is missing, check if cached data exists in localStorage
+      const cachedData = localStorage.getItem('guestData_');
+
+      if (cachedData) {
+        const guestData = JSON.parse(cachedData);
+        document.getElementById('greeting').textContent = `Hello, ${guestData.name}!`;
+        document.getElementById('response').value = guestData.rsvp;
+      } else {
+        document.getElementById('greeting').textContent = 'No row parameter provided, and no cached data found.';
+      }
     }
 
-    // Handle form submission to update the sheet
-    document.getElementById('updateForm').addEventListener('submit', function(event) {
+    // Handle form submission to update the RSVP in Google Sheets
+    document.getElementById('rsvpForm').addEventListener('submit', function(event) {
       event.preventDefault();
-      const newValue = document.getElementById('newValue').value;
+      const response = document.getElementById('response').value;
 
-      // Make POST request to update the sheet
       fetch(`${webAppUrl}`, {
         method: 'POST',
         headers: {
@@ -54,17 +81,21 @@
         },
         body: new URLSearchParams({
           row: row,
-          newValue: newValue
+          response: response
         })
       })
         .then(response => response.text())
         .then(responseText => {
           console.log(responseText);
-          alert('Data updated successfully!');
+          alert('RSVP updated successfully!');
+
+          const updatedGuestData = JSON.parse(localStorage.getItem('guestData_' + row)) || {};
+          updatedGuestData.rsvp = response;
+          localStorage.setItem('guestData_' + row, JSON.stringify(updatedGuestData));
         })
         .catch(error => {
           console.error('Error posting data:', error);
-          alert('Failed to update data.');
+          alert('Failed to submit RSVP.');
         });
     });
   </script>
