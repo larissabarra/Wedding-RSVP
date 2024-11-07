@@ -34,7 +34,7 @@
         document.getElementById('fetchForm').onsubmit = async function(event) {
             event.preventDefault();
             const row = document.getElementById('row').value;
-            const response = await fetch('https://script.google.com/macros/s/AKfycbyBYcqVMtQw34WYwm3Mow2L6ry4oD4DwAEeKzHpFA2ce6sfoIOfDII3wqfCsxZ_78fTFw/exec?row=' + row);
+            const response = await fetch('https://script.google.com/macros/s/AKfycbx6krp7XrPEf3unW84VrHvMqv2HH62sufI_6cu0WrDBzdeagTP7XYf5en6ilexOGfe_gQ/exec?row=' + row);
             const data = await response.json();
             const sheetDataDiv = document.getElementById('sheetData');
 
@@ -54,7 +54,7 @@
             const column = document.getElementById('column').value;
             const value = document.getElementById('value').value;
 
-            const response = await fetch('https://script.google.com/macros/s/AKfycbyBYcqVMtQw34WYwm3Mow2L6ry4oD4DwAEeKzHpFA2ce6sfoIOfDII3wqfCsxZ_78fTFw/exec', {
+            const response = await fetch('https://script.google.com/macros/s/AKfycbx6krp7XrPEf3unW84VrHvMqv2HH62sufI_6cu0WrDBzdeagTP7XYf5en6ilexOGfe_gQ/exec', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
