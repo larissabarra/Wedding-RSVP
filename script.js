@@ -3,7 +3,7 @@ let row = urlParams.get('row');
 const plusOne = urlParams.has('plusOne');
 
 // Google Apps Script web app URL
-const webAppUrl = 'https://script.google.com/macros/s/AKfycbwF7zQ-__h0TR5gBFPZCm8hrgunQT-x5VpXAdwSWpKRMfj9NvpB4FEmUkOUp6pqJ17OyQ/exec';
+const webAppUrl = 'https://script.google.com/macros/s/AKfycbyRAdH_OUlzAmv94aZtTQbCLoZqOMON_a_70YOpQsUc8Xn0MoqwqhqVkKQXWPfeB8_pyg/exec';
 
 // Get cached data if 'row' is provided
 let cachedData = null;
