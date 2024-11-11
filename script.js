@@ -105,4 +105,16 @@ document.getElementById('rsvpForm').addEventListener('submit', function(event) {
 
   fetch(webAppUrl, {
     method: 'POST',
-    headers: { 'Content-Type': '
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: postData
+  })
+    .then(response => response.text())
+    .then(responseText => {
+      console.log(responseText);
+      alert('RSVP updated successfully!');
+    })
+    .catch(error => {
+      console.error('Error posting data:', error);
+      alert('Failed to submit RSVP.');
+    });
+});
