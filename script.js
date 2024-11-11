@@ -1,10 +1,9 @@
-// Parse the 'row' query parameter from the URL
 const urlParams = new URLSearchParams(window.location.search);
 let row = urlParams.get('row');
-console.log('Row parameter:', row); // Log row parameter to see if it's being read correctly
+const plusOne = urlParams.has('plusOne');
 
 // Google Apps Script web app URL
-    const webAppUrl = 'https://script.google.com/macros/s/AKfycbwU-VX2Da5YC-CPp-jCml3p7wZlHFxnMTZfwTJ4h2XAXPsVItoDe_DplpBsPeYPWdrLVg/exec';
+const webAppUrl = 'https://script.google.com/macros/s/AKfycbwF7zQ-__h0TR5gBFPZCm8hrgunQT-x5VpXAdwSWpKRMfj9NvpB4FEmUkOUp6pqJ17OyQ/exec';
 
 // Get cached data if 'row' is provided
 let cachedData = null;
@@ -23,68 +22,87 @@ if (row) {
   }
 }
 
-// Function to display the greeting and form data
-function displayData(guestData) {
-  document.getElementById('greeting').textContent = `Hello, ${guestData.name}!`;
-  document.getElementById('response').value = guestData.rsvp;
+// Function to display greeting and form
+function displayData(guestData, plusOneData) {
+  const greetingElement = document.getElementById('greeting');
+  const mainGuestSection = document.getElementById('mainGuestSection');
+  const plusOneSection = document.getElementById('plusOneSection');
+
+  // Display greeting based on presence of plus one
+  greetingElement.textContent = plusOneData
+    ? `Hello, ${guestData.name} and ${plusOneData.name}!`
+    : `Hello, ${guestData.name}!`;
+
+  // Populate main guest data
+  document.getElementById('mainResponse').value = guestData.rsvp;
+  document.getElementById('mainFood').value = guestData.food;
+  document.getElementById('mainFoodDetails').value = guestData.foodDetails;
+
+  // Populate plus one data if available
+  if (plusOneData) {
+    plusOneSection.style.display = 'block';
+    document.getElementById('plusOneResponse').value = plusOneData.rsvp;
+    document.getElementById('plusOneFood').value = plusOneData.food;
+    document.getElementById('plusOneFoodDetails').value = plusOneData.foodDetails;
+  }
+
   document.getElementById('loadingMessage').style.display = 'none'; // Hide loading message
 }
 
-// If cached data exists, use it
+// Fetch data based on row and cache it
 if (cachedData) {
   const guestData = JSON.parse(cachedData);
-  displayData(guestData);
+  const plusOneData = plusOne ? JSON.parse(localStorage.getItem('guestData_' + (parseInt(row) + 1))) : null;
+  displayData(guestData, plusOneData);
 } else {
-  // Show loading message while fetching data from Google Sheets
-  fetch(`${webAppUrl}?row=${row}`)
+  fetch(`${webAppUrl}?row=${row}&plusOne=${plusOne}`)
     .then(response => response.json())
     .then(data => {
-      // Assuming the data contains the guest's name and previous RSVP (e.g., columns A and B)
-      const guestData = { name: data[0][0], rsvp: data[0][1] };
-      displayData(guestData);
+      const guestData = { name: data[0][0], rsvp: data[0][1], food: data[0][2], foodDetails: data[0][3] };
+      const plusOneData = plusOne && data[1] ? { name: data[1][0], rsvp: data[1][1], food: data[1][2], foodDetails: data[1][3] } : null;
 
-      // Cache the guest data in localStorage for future visits
+      displayData(guestData, plusOneData);
+
+      // Cache guest data
       localStorage.setItem('guestData_' + row, JSON.stringify(guestData));
+      if (plusOneData) {
+        localStorage.setItem('guestData_' + (parseInt(row) + 1), JSON.stringify(plusOneData));
+      }
     })
     .catch(error => {
       console.error('Error fetching data:', error);
       document.getElementById('greeting').textContent = 'Failed to load data.';
-      document.getElementById('loadingMessage').style.display = 'none'; // Hide loading message
+      document.getElementById('loadingMessage').style.display = 'none';
     });
 }
 
-// Handle form submission to update the RSVP in Google Sheets
+// Handle form submission for both main guest and plus one
 document.getElementById('rsvpForm').addEventListener('submit', function(event) {
   event.preventDefault();
-  const response = document.getElementById('response').value;
 
-  // Check if the row and response are available
-  if (row && response) {
-    fetch(`${webAppUrl}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        row: row,
-        newValue: response
-      })
-    })
-      .then(response => response.text())
-      .then(responseText => {
-        console.log(responseText);
-        alert('RSVP updated successfully!');
+  const mainResponse = document.getElementById('mainResponse').value;
+  const mainFood = document.getElementById('mainFood').value;
+  const mainFoodDetails = document.getElementById('mainFoodDetails').value;
 
-        // Update the cached guest data in localStorage
-        const updatedGuestData = JSON.parse(localStorage.getItem('guestData_' + row)) || {};
-        updatedGuestData.rsvp = response;
-        localStorage.setItem('guestData_' + row, JSON.stringify(updatedGuestData));
-      })
-      .catch(error => {
-        console.error('Error posting data:', error);
-        alert('Failed to submit RSVP.');
-      });
-  } else {
-    alert('Please provide your response before submitting.');
+  const postData = new URLSearchParams({
+    row: row,
+    response: mainResponse,
+    food: mainFood,
+    foodDetails: mainFoodDetails
+  });
+
+  // If plus one, add additional data
+  if (plusOne) {
+    const plusOneResponse = document.getElementById('plusOneResponse').value;
+    const plusOneFood = document.getElementById('plusOneFood').value;
+    const plusOneFoodDetails = document.getElementById('plusOneFoodDetails').value;
+
+    postData.append('plusOneRow', parseInt(row) + 1);
+    postData.append('plusOneResponse', plusOneResponse);
+    postData.append('plusOneFood', plusOneFood);
+    postData.append('plusOneFoodDetails', plusOneFoodDetails);
   }
-});
+
+  fetch(webAppUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': '

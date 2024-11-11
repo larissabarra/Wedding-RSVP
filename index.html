@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wedding RSVP</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
@@ -19,11 +19,47 @@
     <!-- RSVP Form -->
     <form id="rsvpForm" class="form">
       <h2>Please RSVP</h2>
-      <label for="response">Will you attend the wedding?</label>
-      <select id="response" name="response" required>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
+
+      <!-- Main Guest RSVP Section -->
+      <div id="mainGuestSection">
+        <h3>Main Guest</h3>
+        <label for="mainResponse">Will you attend the wedding?</label>
+        <select id="mainResponse" name="mainResponse" required>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+
+        <label for="mainFood">Do you have any food restrictions?</label>
+        <select id="mainFood" name="mainFood" required>
+          <option value="none">None</option>
+          <option value="vegetarian">Vegetarian</option>
+          <option value="vegan">Vegan</option>
+          <option value="allergy">Allergy (specify below)</option>
+          <option value="other">Other (specify below)</option>
+        </select>
+        <input type="text" id="mainFoodDetails" name="mainFoodDetails" placeholder="Specify allergy or other details">
+      </div>
+
+      <!-- Plus One RSVP Section (Initially Hidden) -->
+      <div id="plusOneSection" style="display: none;">
+        <h3>Plus One</h3>
+        <label for="plusOneResponse">Will you attend the wedding?</label>
+        <select id="plusOneResponse" name="plusOneResponse">
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+
+        <label for="plusOneFood">Do you have any food restrictions?</label>
+        <select id="plusOneFood" name="plusOneFood">
+          <option value="none">None</option>
+          <option value="vegetarian">Vegetarian</option>
+          <option value="vegan">Vegan</option>
+          <option value="allergy">Allergy (specify below)</option>
+          <option value="other">Other (specify below)</option>
+        </select>
+        <input type="text" id="plusOneFoodDetails" name="plusOneFoodDetails" placeholder="Specify allergy or other details">
+      </div>
+
       <input type="submit" value="Submit">
     </form>
   </div>
