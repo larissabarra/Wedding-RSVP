@@ -7,63 +7,58 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Wedding RSVP</h1>
-
-    <!-- Loading message -->
-    <div id="loadingMessage">Loading your data...</div>
-
-    <!-- Greeting will be populated here -->
-    <div id="greeting"></div>
-
-    <!-- RSVP Form -->
-    <form id="rsvpForm" class="form">
-      <h2>Please RSVP</h2>
-
-      <!-- Main Guest RSVP Section -->
-      <div id="mainGuestSection">
-        <h3>Main Guest</h3>
-        <label for="mainResponse">Will you attend the wedding?</label>
-        <select id="mainResponse" name="mainResponse" required>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-
-        <label for="mainFood">Do you have any food restrictions?</label>
-        <select id="mainFood" name="mainFood" required>
-          <option value="none">None</option>
-          <option value="vegetarian">Vegetarian</option>
-          <option value="vegan">Vegan</option>
-          <option value="allergy">Allergy (specify below)</option>
-          <option value="other">Other (specify below)</option>
-        </select>
-        <input type="text" id="mainFoodDetails" name="mainFoodDetails" placeholder="Specify allergy or other details">
-      </div>
-
-      <!-- Plus One RSVP Section (Initially Hidden) -->
-      <div id="plusOneSection" style="display: none;">
-        <h3>Plus One</h3>
-        <label for="plusOneResponse">Will you attend the wedding?</label>
-        <select id="plusOneResponse" name="plusOneResponse">
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-
-        <label for="plusOneFood">Do you have any food restrictions?</label>
-        <select id="plusOneFood" name="plusOneFood">
-          <option value="none">None</option>
-          <option value="vegetarian">Vegetarian</option>
-          <option value="vegan">Vegan</option>
-          <option value="allergy">Allergy (specify below)</option>
-          <option value="other">Other (specify below)</option>
-        </select>
-        <input type="text" id="plusOneFoodDetails" name="plusOneFoodDetails" placeholder="Specify allergy or other details">
-      </div>
-
-      <input type="submit" value="Submit">
+  <div id="loadingMessage">Loading, please wait...</div>
+  <div id="mainContent" class="hidden">
+    <h1 id="greeting"></h1>
+    <form id="rsvpForm">
+      <section id="mainGuestSection">
+        <h2>Main Guest</h2>
+        <label>RSVP:
+          <select id="mainResponse">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </label>
+        <label>Food Preference:
+          <select id="mainFood">
+            <option value="None">None</option>
+            <option value="Vegetarian">Vegetarian</option>
+            <option value="Vegan">Vegan</option>
+            <option value="Allergy">Allergy</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+        <div id="foodDetailsContainer" class="hidden">
+          <label>Food Details: <input type="text" id="mainFoodDetails"></label>
+        </div>
+      </section>
+      <section id="plusOneSection" class="hidden">
+        <h2>Plus One</h2>
+        <label>RSVP:
+          <select id="plusOneResponse">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </label>
+        <label>Food Preference:
+          <select id="plusOneFood">
+            <option value="None">None</option>
+            <option value="Vegetarian">Vegetarian</option>
+            <option value="Vegan">Vegan</option>
+            <option value="Allergy">Allergy</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+        <div id="plusOneFoodDetailsContainer" class="hidden">
+          <label>Food Details: <input type="text" id="plusOneFoodDetails"></label>
+        </div>
+      </section>
+      <button type="submit">Submit RSVP</button>
     </form>
+    <div id="menu" class="hidden">
+      <button id="changeRsvpButton">Change RSVP</button>
+    </div>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
