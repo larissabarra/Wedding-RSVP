@@ -21,7 +21,7 @@ if (row) {
 function displayData(guestData, plusOneData) {
     const greetingElement = document.getElementById('greeting');
     greetingElement.textContent = plusOneData
-        ? `Hello, ${guestData.name} and ${plusOneData.name}!`
+        ? `Hello, ${guestData.name} & ${plusOneData.name}!`
         : `Hello, ${guestData.name}!`;
 
     document.getElementById('mainGuestName').textContent = guestData.name;
