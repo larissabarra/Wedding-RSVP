@@ -15,7 +15,7 @@ body {
   align-items: center;
   min-height: 100vh;
   margin: 0;
-  background: url(bg.jpg) repeat;
+  background: url(bg.png) bottom repeat-x;
   font-family: poiret;
 }
 
