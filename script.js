@@ -97,14 +97,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const postData = new URLSearchParams({
             row: row,
-            response: document.getElementById("mainResponse").value,
+            response: document.querySelector('input[name="mainResponse"]:checked').value,
             food: document.getElementById("mainFood").value,
             foodDetails: document.getElementById("mainFoodDetails").value
         });
 
         if (plusOne) {
             postData.append('plusOneRow', parseInt(row) + 1);
-            postData.append('plusOneResponse', document.getElementById("plusOneResponse").value);
+            postData.append('plusOneResponse', document.querySelector('input[name="plusOneResponse"]:checked').value);
             postData.append('plusOneFood', document.getElementById("plusOneFood").value);
             postData.append('plusOneFoodDetails', document.getElementById("plusOneFoodDetails").value);
         }

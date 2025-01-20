@@ -9,7 +9,29 @@
 </head>
 
 <body>
-    <div class="box">
+    <nav class="menu">
+        <ul>
+            <li><a href="#page1">Page 1</a></li>
+            <li><a href="#page2">Page 2</a></li>
+            <li><a href="#page3">Page 3</a></li>
+            <li><a href="#page4">Page 4</a></li>
+        </ul>
+    </nav>
+
+    <div id="page1" class="page">
+        <h1>Welcome to Page 1</h1>
+    </div>
+
+    <div id="page2" class="page">
+        <h1>Welcome to Page 2</h1>
+    </div>
+
+    <div id="page3" class="page">
+        <h1>Welcome to Page 3</h1>
+    </div>
+
+    <div id="page4" class="page">
+        <h1>RSVP</h1>
         <div id="loadingMessage">
             <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <style>
@@ -54,10 +76,10 @@
                         <!-- RSVP Radio Buttons -->
                         <div class="radio-group">
                             <label>Are you coming?</label>
-                            <input type="radio" id="RSVPYes" name="mainResponse" value="Yes">
-                            <label for="RSVPYes">Yes</label>
-                            <input type="radio" id="RSVPNo" name="mainResponse" value="No">
-                            <label for="RSVPNo">No</label>
+                            <input type="radio" id="mainRSVPYes" name="mainResponse" value="Yes">
+                            <label for="mainRSVPYes">Yes</label>
+                            <input type="radio" id="mainRSVPNo" name="mainResponse" value="No">
+                            <label for="mainRSVPNo">No</label>
                         </div>
 
                         <!-- Food Preference Dropdown -->
@@ -83,10 +105,10 @@
                         <!-- RSVP Radio Buttons -->
                         <div class="radio-group">
                             <label>Are you coming?</label>
-                            <input type="radio" id="RSVPYes" name="plusOneResponse" value="Yes">
-                            <label for="RSVPYes">Yes</label>
-                            <input type="radio" id="RSVPNo" name="plusOneResponse" value="No">
-                            <label for="RSVPNo">No</label>
+                            <input type="radio" id="plusOneRSVPYes" name="plusOneResponse" value="Yes">
+                            <label for="plusOneRSVPYes">Yes</label>
+                            <input type="radio" id="plusOneRSVPNo" name="plusOneResponse" value="No">
+                            <label for="plusOneRSVPNo">No</label>
                         </div>
 
                         <!-- Food Preference Dropdown -->
@@ -113,7 +135,9 @@
                 <button id="changeRsvpButton">Change RSVP</button>
             </div>
         </div>
+    </div>
 
+    <!-- <div class="box">
         <div class="border">
             <div class="border__corner border__corner--top border__corner--left"></div>
             <div class="border__corner border__corner--top border__corner--right"></div>
@@ -121,7 +145,7 @@
             <div class="border__corner border__corner--bottom border__corner--left"></div>
         </div>
         <div class="cutout"></div>
-    </div>
+    </div> -->
     <script src="script.js"></script>
 </body>
 

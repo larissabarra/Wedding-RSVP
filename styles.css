@@ -8,6 +8,21 @@
   src: url(PoiretOne-Regular.ttf);
 }
 
+/* Reset styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body and html to ensure full height */
+html,
+body {
+  height: 100%;
+  scroll-behavior: smooth;
+  /* Enables smooth scrolling */
+}
+
 body {
   font-family: Arial, sans-serif;
   display: flex;
@@ -16,7 +31,72 @@ body {
   min-height: 100vh;
   margin: 0;
   background: url(bg.png) bottom repeat-x;
+  background-size: auto 30%;
   font-family: poiret;
+}
+
+/* General page styling */
+.page {
+  height: 100vh;
+  /* Each page takes the full height of the viewport */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 2rem;
+  color: white;
+}
+
+/* Background colors for pages */
+#page1 {
+  background-color: #4CAF50;
+  /* Green */
+}
+
+#page2 {
+  background-color: #2196F3;
+  /* Blue */
+}
+
+#page3 {
+  background-color: #FF5722;
+  /* Orange */
+}
+
+#page4 {
+  background-color: #9C27B0;
+  /* Purple */
+}
+
+/* Menu styling */
+.menu {
+  position: fixed;
+  /* Keeps the menu in place */
+  top: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  padding: 10px 0;
+}
+
+.menu ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+
+.menu a:hover {
+  color: #FFD700;
+  /* Gold on hover */
 }
 
 .hidden {
