@@ -25,9 +25,6 @@ body {
 
 body {
   font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
   margin: 0;
   background: url(bg.png) bottom repeat-x;
@@ -43,35 +40,10 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 2rem;
-  color: white;
-}
-
-/* Background colors for pages */
-#page1 {
-  background-color: #4CAF50;
-  /* Green */
-}
-
-#page2 {
-  background-color: #2196F3;
-  /* Blue */
-}
-
-#page3 {
-  background-color: #FF5722;
-  /* Orange */
-}
-
-#page4 {
-  background-color: #9C27B0;
-  /* Purple */
 }
 
 /* Menu styling */
 .menu {
-  position: fixed;
-  /* Keeps the menu in place */
   top: 0;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.8);
@@ -199,7 +171,7 @@ form select {
 :root {
   --book-ratio: 9/6;
   --size: 70vw;
-  --vertical-size: 70vh;
+  --vertical-size: 10vh;
   --size-padding: 5vh;
   --size-corner: 3.5vh;
   --color-bg: #fff;
@@ -214,10 +186,11 @@ form select {
 }
 
 .box {
+  position: fixed;
+  /* Keeps the menu in place */
   width: var(--size);
   height: var(--vertical-size);
   background: var(--color-bg);
-  position: relative;
   padding: var(--size-padding);
   margin: 10vh auto;
   box-shadow: 0px 0px 15px #aaa;
