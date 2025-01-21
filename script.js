@@ -1,7 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 let row = urlParams.get('row');
 const plusOne = urlParams.has('plusOne');
-const webAppUrl = 'https://script.google.com/macros/s/AKfycby85nCetL4vHs5LJQ6SxGRFvD24oJPoEoQpA1BDctfAOqJZBb8S21RROFRpdCxtYo1axw/exec';
+const webAppUrl = 'https://script.google.com/macros/s/AKfycbxecqdrAHlkfVDHY_T2pgMp5QfTpybla_eAMILryMlldNS3RuETcNe7_QuS27SoC5_LUA/exec';
 
 let cachedData = null;
 
