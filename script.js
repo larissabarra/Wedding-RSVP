@@ -1,7 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 let row = urlParams.get('row');
 const plusOne = urlParams.has('plusOne');
-const webAppUrl = 'https://script.google.com/macros/s/AKfycbxKgY23SUsUzFCq_6unfd9077gf6H2I4r5YDoJBZ5pAoKwUmfnXKBTzDrOOlVejRq5_Fw/exec';
+const webAppUrl = 'https://script.google.com/macros/s/AKfycbzyY1tqaPt3sA-0wMgqJjRG2CEX60oXEfv_IVlZgERxR1HwBesy3eJVUUjGftIsi8d2wg/exec';
 
 let cachedData = null;
 
@@ -66,8 +66,12 @@ function fetchData(fromUrl) {
     fetch(fromUrl)
         .then(response => response.json())
         .then(data => {
-            const guestData = { name: data[0][0], rsvp: data[0][1], food: data[0][2], foodDetails: data[0][3] };
-            const plusOneData = plusOne && data[1] ? { name: data[1][0], rsvp: data[1][1], food: data[1][2], foodDetails: data[1][3] } : null;
+            row = data[0][0];
+            if (plusOne == null) {
+                plusOne = data[0][2] == "yes";
+            }
+            const guestData = { name: data[0][1], rsvp: data[0][3], food: data[0][4], foodDetails: data[0][5] };
+            const plusOneData = plusOne && data[1] ? { name: data[1][1], rsvp: data[1][3], food: data[1][4], foodDetails: data[1][5] } : null;
 
             displayData(guestData, plusOneData);
 
