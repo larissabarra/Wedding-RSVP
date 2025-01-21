@@ -1,7 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 let row = urlParams.get('row');
 const plusOne = urlParams.has('plusOne');
-const webAppUrl = 'https://script.google.com/macros/s/AKfycbwdR6UMKH7S2eQ0VTXA21_b72W2EnuD8sr5cMqBaD56dlDey4TW5yf079gOJ8ujJLE2lw/exec';
+const webAppUrl = 'https://script.google.com/macros/s/AKfycbxKgY23SUsUzFCq_6unfd9077gf6H2I4r5YDoJBZ5pAoKwUmfnXKBTzDrOOlVejRq5_Fw/exec';
 
 let cachedData = null;
 
@@ -43,6 +43,7 @@ function displayData(guestData, plusOneData) {
 
     document.getElementById('loadingMessage').classList.add('hidden');
     document.getElementById('mainContent').classList.remove('hidden');
+    document.getElementById('fallbackForm').classList.add('hidden');
 }
 
 function setupFoodDetailsToggle() {
@@ -95,6 +96,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             fetcData(`${webAppUrl}?row=${row}&plusOne=${plusOne}`);
         } else {
             document.getElementById('fallbackForm').classList.remove('hidden');
+            document.getElementById("loadingMessage").classList.add("hidden");
         }
     }
 
