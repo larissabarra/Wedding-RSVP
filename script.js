@@ -66,8 +66,8 @@ function fetchData(fromUrl) {
     fetch(fromUrl)
         .then(response => response.json())
         .then(data => {
-            row = data[0][0];
-            if (plusOne == null) {
+            if (row == null) {
+                row = data[0][0];
                 plusOne = data[0][2] == "yes";
             }
             const guestData = { name: data[0][1], rsvp: data[0][3], food: data[0][4], foodDetails: data[0][5] };
