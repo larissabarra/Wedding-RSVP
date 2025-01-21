@@ -27,7 +27,7 @@ body {
   font-family: Arial, sans-serif;
   min-height: 100vh;
   margin: 0;
-  background: url(bg.png) bottom repeat-x;
+  background: url(bg.png) fixed bottom repeat-x;
   background-size: auto 30%;
   font-family: poiret;
 }
@@ -46,9 +46,9 @@ body {
 .menu {
   top: 0;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
   z-index: 1000;
   padding: 10px 0;
+  position: relative;
 }
 
 .menu ul {
@@ -60,14 +60,15 @@ body {
 
 .menu a {
   text-decoration: none;
-  color: white;
+  color: #000149;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   transition: color 0.3s;
+  font-family: voga;
 }
 
 .menu a:hover {
-  color: #FFD700;
+  color: #aaa;
   /* Gold on hover */
 }
 
@@ -169,10 +170,9 @@ form select {
 }
 
 :root {
-  --book-ratio: 9/6;
   --size: 70vw;
   --vertical-size: 10vh;
-  --size-padding: 5vh;
+  --size-padding: 2.5vh;
   --size-corner: 3.5vh;
   --color-bg: #fff;
   --s-border-1: 3px;
@@ -181,8 +181,8 @@ form select {
   --c-border-1: #907c5a;
   --c-border-2: #907c5a;
   --c-border-3: #907c5a;
-  --r-border-3: 8vh;
-  --o-border-3: 2vh;
+  --r-border-3: 3vh;
+  --o-border-3: 6vh;
 }
 
 .box {
@@ -194,6 +194,8 @@ form select {
   padding: var(--size-padding);
   margin: 10vh auto;
   box-shadow: 0px 0px 15px #aaa;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .border {
@@ -257,7 +259,7 @@ form select {
   &:after {
     content: "";
     position: absolute;
-    inset: 0;
+    inset: 0 -1vh;
     background: radial-gradient(var(--r-border-3) at var(--r-border-3) var(--r-border-3),
         transparent calc(98% - var(--s-border-3)),
         var(--c-border-3) calc(100% - var(--s-border-3)) 98%,
