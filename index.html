@@ -74,6 +74,14 @@
                 <circle class="spinner_b2T7 spinner_c9oY" cx="20" cy="12" r="3" />
             </svg>
         </div>
+        <div id="fallbackForm" class="hidden">
+            <h1 id="fallbackGreeting">Hello, stranger!</h1>
+            <p>Please enter your name as stated in your invitation.</p>
+            <form id="guestFindForm">
+                <label>Name: <input type="text" id="guestName"></label>
+                <button type="submit">RSVP</button>
+            </form>
+        </div>
         <div id="mainContent" class="hidden">
             <h1 id="greeting"></h1>
             <p>We would be so happy to have you with us for our reception!<br />Please confirm your presence and food
@@ -141,9 +149,6 @@
                 </div>
                 <button type="submit">Submit RSVP</button>
             </form>
-            <div id="menu" class="hidden">
-                <button id="changeRsvpButton">Change RSVP</button>
-            </div>
         </div>
     </div>
 

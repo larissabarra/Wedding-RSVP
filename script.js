@@ -1,7 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 let row = urlParams.get('row');
 const plusOne = urlParams.has('plusOne');
-const webAppUrl = 'https://script.google.com/macros/s/AKfycbxiQ9a_KyNcjeeZPwpDlpDqzQ9zk_gsAPAlEjpxM4dyBgIdiOwCXQFEw7BS8ZFkkros2Q/exec';
+const webAppUrl = 'https://script.google.com/macros/s/AKfycbwdR6UMKH7S2eQ0VTXA21_b72W2EnuD8sr5cMqBaD56dlDey4TW5yf079gOJ8ujJLE2lw/exec';
 
 let cachedData = null;
 
@@ -61,6 +61,27 @@ function setupFoodDetailsToggle() {
     }
 }
 
+function fetchData(fromUrl) {
+    fetch(fromUrl)
+        .then(response => response.json())
+        .then(data => {
+            const guestData = { name: data[0][0], rsvp: data[0][1], food: data[0][2], foodDetails: data[0][3] };
+            const plusOneData = plusOne && data[1] ? { name: data[1][0], rsvp: data[1][1], food: data[1][2], foodDetails: data[1][3] } : null;
+
+            displayData(guestData, plusOneData);
+
+            localStorage.setItem('guestData_' + row, JSON.stringify(guestData));
+            if (plusOneData) {
+                localStorage.setItem('guestData_' + (parseInt(row) + 1), JSON.stringify(plusOneData));
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            document.getElementById('greeting').textContent = 'Failed to load data.';
+            document.getElementById('loadingMessage').style.display = 'none';
+        });
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("loadingMessage").classList.remove("hidden");
     document.getElementById("mainContent").classList.add("hidden");
@@ -71,26 +92,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         displayData(guestData, plusOneData);
     } else {
         if (row) {
-            fetch(`${webAppUrl}?row=${row}&plusOne=${plusOne}`)
-                .then(response => response.json())
-                .then(data => {
-                    const guestData = { name: data[0][0], rsvp: data[0][1], food: data[0][2], foodDetails: data[0][3] };
-                    const plusOneData = plusOne && data[1] ? { name: data[1][0], rsvp: data[1][1], food: data[1][2], foodDetails: data[1][3] } : null;
-
-                    displayData(guestData, plusOneData);
-
-                    localStorage.setItem('guestData_' + row, JSON.stringify(guestData));
-                    if (plusOneData) {
-                        localStorage.setItem('guestData_' + (parseInt(row) + 1), JSON.stringify(plusOneData));
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching data:', error);
-                    document.getElementById('greeting').textContent = 'Failed to load data.';
-                    document.getElementById('loadingMessage').style.display = 'none';
-                });
+            fetcData(`${webAppUrl}?row=${row}&plusOne=${plusOne}`);
         } else {
-            document.getElementById('loadingMessage').textContent = "ninguém"
+            document.getElementById('fallbackForm').classList.remove('hidden');
         }
     }
 
@@ -129,8 +133,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
     });
 
-    document.getElementById("changeRsvpButton").addEventListener("click", () => {
-        document.getElementById("menu").classList.add("hidden");
-        document.getElementById("rsvpForm").classList.remove("hidden");
+    document.getElementById("guestFindForm").addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        fetchData(`${webAppUrl}?name=${document.getElementById("guestName").value}`);
     });
+
+    // document.getElementById("changeRsvpButton").addEventListener("click", () => {
+    //     document.getElementById("menu").classList.add("hidden");
+    //     document.getElementById("rsvpForm").classList.remove("hidden");
+    // });
 });
