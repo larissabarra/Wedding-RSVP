@@ -70,24 +70,28 @@ document.addEventListener("DOMContentLoaded", async () => {
         const plusOneData = plusOne ? JSON.parse(localStorage.getItem('guestData_' + (parseInt(row) + 1))) : null;
         displayData(guestData, plusOneData);
     } else {
-        fetch(`${webAppUrl}?row=${row}&plusOne=${plusOne}`)
-            .then(response => response.json())
-            .then(data => {
-                const guestData = { name: data[0][0], rsvp: data[0][1], food: data[0][2], foodDetails: data[0][3] };
-                const plusOneData = plusOne && data[1] ? { name: data[1][0], rsvp: data[1][1], food: data[1][2], foodDetails: data[1][3] } : null;
+        if (row) {
+            fetch(`${webAppUrl}?row=${row}&plusOne=${plusOne}`)
+                .then(response => response.json())
+                .then(data => {
+                    const guestData = { name: data[0][0], rsvp: data[0][1], food: data[0][2], foodDetails: data[0][3] };
+                    const plusOneData = plusOne && data[1] ? { name: data[1][0], rsvp: data[1][1], food: data[1][2], foodDetails: data[1][3] } : null;
 
-                displayData(guestData, plusOneData);
+                    displayData(guestData, plusOneData);
 
-                localStorage.setItem('guestData_' + row, JSON.stringify(guestData));
-                if (plusOneData) {
-                    localStorage.setItem('guestData_' + (parseInt(row) + 1), JSON.stringify(plusOneData));
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-                document.getElementById('greeting').textContent = 'Failed to load data.';
-                document.getElementById('loadingMessage').style.display = 'none';
-            });
+                    localStorage.setItem('guestData_' + row, JSON.stringify(guestData));
+                    if (plusOneData) {
+                        localStorage.setItem('guestData_' + (parseInt(row) + 1), JSON.stringify(plusOneData));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    document.getElementById('greeting').textContent = 'Failed to load data.';
+                    document.getElementById('loadingMessage').style.display = 'none';
+                });
+        } else {
+            document.getElementById('loadingMessage').textContent = "ninguém"
+        }
     }
 
     setupFoodDetailsToggle();
