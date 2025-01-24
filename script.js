@@ -87,11 +87,6 @@ function fetchData(fromUrl) {
         });
 }
 
-document.querySelector('.menu-toggle').addEventListener('click', () => {
-    const menuList = document.querySelector('.menu ul');
-    menuList.classList.toggle('open');
-});
-
 document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("loadingMessage").classList.remove("hidden");
     document.getElementById("mainContent").classList.add("hidden");
@@ -148,6 +143,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         event.preventDefault();
 
         fetchData(`${webAppUrl}?name=${document.getElementById("guestName").value}`);
+    });
+
+    const toggleButton = document.querySelector('.menu-toggle');
+    const menuList = document.querySelector('.menu ul');
+
+    toggleButton.addEventListener('click', () => {
+        console.log("oi");
+        menuList.classList.toggle('open');
     });
 
     // document.getElementById("changeRsvpButton").addEventListener("click", () => {

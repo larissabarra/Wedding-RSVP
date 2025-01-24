@@ -77,6 +77,10 @@ body {
 /* Responsive behavior */
 @media (max-width: 600px) {
 
+  .menu-toggle {
+    display: block;
+  }
+
   /* Hide the menu items initially and show the toggle button */
   .menu ul {
     display: none;
