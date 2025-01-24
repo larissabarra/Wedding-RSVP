@@ -236,8 +236,8 @@ form select {
   --s-border-2: 2px;
   --s-border-3: 3px;
   --c-border-1: #907c5a;
-  --c-border-2: #907c5a;
-  --c-border-3: #907c5a;
+  --c-border-2: #ccaf7c;
+  --c-border-3: #ccaf7c;
   --r-border-3: 3vh;
   --o-border-3: 6vh;
 }
@@ -258,8 +258,9 @@ form select {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    width: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(calc(-100% - 1vh));
+    width: 60%;
     aspect-ratio: 3166 / 481;
     background-image: url('top.png');
     background-size: contain;
