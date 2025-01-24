@@ -229,7 +229,7 @@ form select {
   --size: 70vw;
   --vertical-size: 10vh;
   --size-padding: 2.5vh;
-  --size-inner-border: 4.5vw;
+  --size-inner-border: 1.5vw;
   --size-corner: 3.5vh;
   --color-bg: #fff;
   --s-border-1: 3px;
@@ -263,6 +263,18 @@ form select {
   inset: 50%;
   transform: translate(-50%, -50%);
 
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-image: url('top.png');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+  }
+
   &:after {
     content: "";
     position: absolute;
@@ -272,18 +284,6 @@ form select {
     top: calc(var(--size-inner-border) / 2);
     box-sizing: border-box;
     border: var(--s-border-2) solid var(--c-border-2);
-  }
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-image: url('top.png');
-    background-size: cover;
-    background-position: center;
-    z-index: 1;
   }
 
   &__corner {
