@@ -87,6 +87,11 @@ function fetchData(fromUrl) {
         });
 }
 
+document.querySelector('.menu-toggle').addEventListener('click', () => {
+    const menuList = document.querySelector('.menu ul');
+    menuList.classList.toggle('open');
+});
+
 document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("loadingMessage").classList.remove("hidden");
     document.getElementById("mainContent").classList.add("hidden");
