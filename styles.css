@@ -132,6 +132,16 @@ body {
   .border {
     flex-direction: column;
   }
+
+  .locationCcontent {
+    flex-direction: column;
+    align-items: center;
+
+    &__child {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+  }
 }
 
 /* Default: hide the toggle button on larger screens */
