@@ -78,8 +78,8 @@ body {
 
 /* Base styles for the menu */
 .menu {
-  top: 0;
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
   z-index: 1000;
   padding: 10px 0;
   position: relative;
@@ -89,62 +89,13 @@ body {
   list-style: none;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 40px;
   margin: 0;
   padding: 0;
 }
 
 .menu ul li {
   display: inline;
-}
-
-/* Responsive behavior */
-@media (max-width: 600px) {
-
-  .menu-toggle {
-    display: block !important;
-  }
-
-  /* Hide the menu items initially and show the toggle button */
-  .menu ul {
-    display: none;
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-    background-color: #fff;
-    padding-bottom: 10px;
-    border: 1px solid #907c5a;
-    border-top: 0;
-  }
-
-  .menu ul.open {
-    display: flex;
-  }
-
-  .menu-toggle {
-    display: block;
-    background: none;
-    border: none;
-    font-size: 36px;
-    cursor: pointer;
-    color: #000149;
-    margin: 0 auto;
-  }
-
-  .border {
-    flex-direction: column;
-  }
-
-  .locationContent {
-    flex-direction: column-reverse;
-    align-items: center;
-
-    &__child {
-      flex: 1 1 100%;
-      max-width: 100%;
-      text-align: center;
-    }
-  }
 }
 
 /* Default: hide the toggle button on larger screens */
@@ -162,11 +113,11 @@ body {
   font-size: 1.8rem;
   transition: color 0.3s;
   font-family: voga;
+  line-height: 1em;
 }
 
 .menu a:hover {
   color: #aaa;
-  /* Gold on hover */
 }
 
 .hidden {
@@ -391,5 +342,54 @@ form select {
       linear-gradient(var(--c-border-3) var(--s-border-3),
         transparent 0 calc(100% - var(--s-border-3)),
         var(--c-border-3) 0) 50% / calc(100% - (var(--r-border-3) * 2) + var(--s-border-3)) 100% no-repeat;
+  }
+}
+
+/* Responsive behavior */
+@media (max-width: 600px) {
+
+  .menu-toggle {
+    display: block !important;
+  }
+
+  /* Hide the menu items initially and show the toggle button */
+  .menu ul {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    background-color: #fff;
+    padding-bottom: 10px;
+    border: 1px solid #907c5a;
+    border-top: 0;
+  }
+
+  .menu ul.open {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 36px;
+    cursor: pointer;
+    color: #000149;
+    margin: 0 auto;
+  }
+
+  .border {
+    flex-direction: column;
+  }
+
+  .locationContent {
+    flex-direction: column-reverse;
+    align-items: center;
+
+    &__child {
+      flex: 1 1 100%;
+      max-width: 100%;
+      text-align: center;
+    }
   }
 }
