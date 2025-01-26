@@ -254,7 +254,9 @@ form select {
     position: absolute;
     left: 50%;
     transform: translateX(-50%) translateY(calc(-100% - 2vh));
-    width: 60%;
+    width: 90%;
+    height: auto;
+    max-height: 11vh;
     aspect-ratio: 3166 / 481;
     background-image: url('top.png');
     background-size: contain;
@@ -269,7 +271,6 @@ form select {
   /* Keeps the menu in place */
   width: var(--size);
   height: var(--vertical-size);
-  padding: var(--size-padding);
   box-shadow: 0px 0px 15px #aaa;
 }
 
