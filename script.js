@@ -125,6 +125,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         fetch(webAppUrl, {
             method: 'POST',
+            redirect: 'follow',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: postData
         })
