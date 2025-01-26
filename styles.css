@@ -66,12 +66,6 @@ body {
   display: inline;
 }
 
-.menu ul li a {
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-}
-
 /* Responsive behavior */
 @media (max-width: 600px) {
 
@@ -245,14 +239,16 @@ form select {
 #top {
   position: fixed;
   background: var(--color-bg);
-  margin: 10vh auto;
+  padding-top: 15vh;
+  padding-bottom: 8vh;
+  left: 50%;
+  transform: translate(-50%, 0);
 
   &:before {
     content: '';
     position: absolute;
-    top: 0;
     left: 50%;
-    transform: translateX(-50%) translateY(calc(-100% - 1vh));
+    transform: translateX(-50%) translateY(calc(-100% - 2vh));
     width: 60%;
     aspect-ratio: 3166 / 481;
     background-image: url('top.png');
@@ -270,8 +266,6 @@ form select {
   height: var(--vertical-size);
   padding: var(--size-padding);
   box-shadow: 0px 0px 15px #aaa;
-  left: 50%;
-  transform: translate(-50%, 0);
 }
 
 .border {
