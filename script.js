@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             .then(response => response.text())
             .then(() => {
                 document.getElementById("rsvpForm").classList.add("hidden");
-                document.getElementById("menu").classList.remove("hidden");
+                // show success msg
             })
             .catch(error => {
                 console.error('Error posting data:', error);
@@ -142,6 +142,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     document.getElementById("guestFindForm").addEventListener("submit", async (event) => {
         event.preventDefault();
+        document.getElementById('fallbackForm').classList.add('hidden');
+        document.getElementById("loadingMessage").classList.remove("hidden");
 
         fetchData(`${webAppUrl}?name=${document.getElementById("guestName").value}`);
     });
