@@ -55,6 +55,7 @@ body {
   &__child {
     flex: 1 1 48%;
     max-width: 48%;
+    width: 38%;
     min-width: 30vw;
   }
 }
@@ -134,7 +135,7 @@ body {
     flex-direction: column;
   }
 
-  .locationCcontent {
+  .locationContent {
     flex-direction: column-reverse;
     align-items: center;
 
