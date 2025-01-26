@@ -115,7 +115,7 @@ body {
 
 .menu a {
   text-decoration: none;
-  color: #000149;
+  color: #0f1869;
   font-weight: bold;
   font-size: 1.8rem;
   transition: color 0.3s;
@@ -173,7 +173,7 @@ form button[type="submit"] {
   background: #907c5a;
   border: none;
   color: white;
-  cursor: ;
+  cursor: pointer;
 }
 
 /* General form layout */
