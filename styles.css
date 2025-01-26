@@ -44,7 +44,7 @@ body {
   padding: 33vh 10vw 20vh 10vw;
 }
 
-#locationContent {
+.locationContent {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
