@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (cachedData) {
         const guestData = JSON.parse(cachedData);
-        const plusOneData = plusOne ? JSON.parse(localStorage.getItem('guestData_' + (parseInt(row) + 1))) : null;
+        const plusOneData = JSON.parse(localStorage.getItem('guestData_' + (parseInt(row) + 1)));
         displayData(guestData, plusOneData);
     } else {
         if (row) {
