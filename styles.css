@@ -13,6 +13,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  line-height: 2em;
 }
 
 /* Body and html to ensure full height */
@@ -38,7 +39,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
   padding: 33vh 10vw 20vh 10vw;
 }
@@ -49,12 +50,28 @@ body {
   width: 100%;
   justify-content: space-between;
   gap: 1rem;
+
+  &__child {
+    flex: 1 1 48%;
+    max-width: 48%;
+    min-width: 3vw;
+  }
 }
 
-#locationContent .child {
-  flex: 1 1 48%;
-  max-width: 48%;
-  min-width: 3vw;
+#locationContent iframe {
+  height: 30vh;
+}
+
+#locationInfo {
+  text-align: left;
+}
+
+#locationInfo svg {
+  max-height: 2.5em;
+}
+
+#locationInfo h3 {
+  padding: 10px auto;
 }
 
 /* Base styles for the menu */
@@ -167,6 +184,7 @@ body {
 h1,
 h2 {
   font-family: voga;
+  padding-bottom: 1em;
 }
 
 section {
