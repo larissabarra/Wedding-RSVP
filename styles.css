@@ -49,16 +49,17 @@ body {
   flex-wrap: wrap;
   width: 100%;
   justify-content: center;
+  align-items: center;
   gap: 3rem;
 
   &__child {
     flex: 1 1 48%;
     max-width: 48%;
-    min-width: 3vw;
+    min-width: 30vw;
   }
 }
 
-#locationContent iframe {
+#map {
   height: 30vh;
 }
 
@@ -134,12 +135,13 @@ body {
   }
 
   .locationCcontent {
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
 
     &__child {
       flex: 1 1 100%;
       max-width: 100%;
+      text-align: center;
     }
   }
 }
@@ -289,6 +291,7 @@ form select {
   padding-bottom: 8vh;
   left: 50%;
   transform: translate(-50%, 0);
+  width: 100%;
 
   &:before {
     content: '';
@@ -308,10 +311,9 @@ form select {
 }
 
 .box {
-
-  /* Keeps the menu in place */
   width: var(--size);
   height: var(--vertical-size);
+  margin: 0 auto;
   box-shadow: 0px 0px 15px #aaa;
 }
 
