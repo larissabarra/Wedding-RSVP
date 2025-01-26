@@ -227,8 +227,8 @@ form select {
 
 :root {
   --size: 70vw;
-  --vertical-size: 10vh;
-  --size-padding: 2.5vh;
+  --vertical-size: 8vh;
+  --size-padding: 1.5vh;
   --size-inner-border: 1.5vw;
   --size-corner: 3.5vh;
   --color-bg: #fff;
@@ -239,20 +239,13 @@ form select {
   --c-border-2: #ccaf7c;
   --c-border-3: #ccaf7c;
   --r-border-3: 3vh;
-  --o-border-3: 6vh;
+  --o-border-3: 5vh;
 }
 
-.box {
+#top {
   position: fixed;
-  /* Keeps the menu in place */
-  width: var(--size);
-  height: var(--vertical-size);
   background: var(--color-bg);
-  padding: var(--size-padding);
   margin: 10vh auto;
-  box-shadow: 0px 0px 15px #aaa;
-  left: 50%;
-  transform: translate(-50%, 0);
 
   &:before {
     content: '';
@@ -268,6 +261,17 @@ form select {
     background-position: center;
     z-index: 1;
   }
+}
+
+.box {
+
+  /* Keeps the menu in place */
+  width: var(--size);
+  height: var(--vertical-size);
+  padding: var(--size-padding);
+  box-shadow: 0px 0px 15px #aaa;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .border {
