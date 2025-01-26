@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         displayData(guestData, plusOneData);
     } else {
         if (row) {
-            fetcData(`${webAppUrl}?row=${row}&plusOne=${plusOne}`);
+            fetchData(`${webAppUrl}?row=${row}&plusOne=${plusOne}`);
         } else {
             document.getElementById('fallbackForm').classList.remove('hidden');
             document.getElementById("loadingMessage").classList.add("hidden");
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         fetch(webAppUrl, {
             method: 'POST',
             redirect: 'follow',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: postData
         })
             .then(response => response.text())
