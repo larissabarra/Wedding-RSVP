@@ -8,7 +8,7 @@ let cachedPlusOneData = null;
 
 if (row) {
     cachedData = localStorage.getItem('guestData_' + row);
-    const plusOneRow = row + 1;
+    const plusOneRow = Number(row) + 1;
     cachedPlusOneData = localStorage.getItem('guestData_' + plusOneRow);
     plusOne = cachedPlusOneData != null;
 } else {
@@ -17,7 +17,7 @@ if (row) {
         if (key.startsWith('guestData_')) {
             cachedData = localStorage.getItem(key);
             row = key.split('_')[1];
-            const plusOneRow = row + 1;
+            const plusOneRow = Number(row);
             console.log(plusOneRow);
             cachedPlusOneData = localStorage.getItem('guestData_' + plusOneRow);
             plusOne = cachedPlusOneData != null;
