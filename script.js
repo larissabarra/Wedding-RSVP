@@ -152,9 +152,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     const menuList = document.querySelector('.menu ul');
 
     toggleButton.addEventListener('click', () => {
-        console.log("oi");
         menuList.classList.toggle('open');
     });
+
+    document.querySelectorAll('.menu a').addEventListener('click', () => {
+        menuList.classList.remove('open');
+    })
 
     // document.getElementById("changeRsvpButton").addEventListener("click", () => {
     //     document.getElementById("menu").classList.add("hidden");
