@@ -156,11 +156,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const mainGuestRSVP = document.querySelector('input[name="mainResponse"]:checked').value;
         const mainGuestFood = document.getElementById("mainFood").value;
-        const mainGuestFoodDetails = ["Allergy", "Other"].includes(mainFoodSelect.value) ? document.getElementById("mainFoodDetails").value : "";
+        const mainGuestFoodDetails = ["Allergy", "Other"].includes(mainGuestFood) ? document.getElementById("mainFoodDetails").value : "";
 
         const plusOneRSVP = document.querySelector('input[name="plusOneResponse"]:checked').value;
         const plusOneFood = document.getElementById("plusOneFood").value;
-        const plusOneFoodDetails = ["Allergy", "Other"].includes(mainFoodSelect.value) ? document.getElementById("plusOneFoodDetails").value : "";
+        const plusOneFoodDetails = ["Allergy", "Other"].includes(plusOneFood) ? document.getElementById("plusOneFoodDetails").value : "";
 
         const postData = new URLSearchParams({
             row: row,
