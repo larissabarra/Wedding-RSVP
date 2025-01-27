@@ -54,16 +54,10 @@ body {
   gap: 3rem;
 }
 
-#locationContent .locationContent__child {
-  flex: 1 1 48%;
-  max-width: 48%;
-  width: 38%;
-  min-width: 30vw;
-}
-
+#locationContent .locationContent__child,
 #welcomeContent .welcomeContent__child {
   flex: 1 1 48%;
-  max-width: 35%;
+  max-width: 45%;
   width: auto;
   min-width: 30vw;
 }
@@ -151,6 +145,11 @@ body {
   margin: 0;
 }
 
+#infoContent {
+  max-width: 70vw;
+  text-align: left;
+}
+
 #sectionsContainer {
   display: flex;
   flex-direction: row;
@@ -163,6 +162,11 @@ h1,
 h2 {
   font-family: voga;
   padding-bottom: 1em;
+  color: #907c5a;
+}
+
+p {
+  padding-bottom: 15px;
 }
 
 section {
@@ -426,5 +430,10 @@ form select {
 
   #sectionsContainer {
     flex-direction: column;
+  }
+
+  #infoContent {
+    max-width: 90vw;
+    text-align: center;
   }
 }
