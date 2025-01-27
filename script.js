@@ -55,12 +55,28 @@ function displayData(guestData, plusOneData) {
 }
 
 function showRSVPSummary(guestData, plusOneData) {
-    let summaryText = `${guestData.name} is ${guestData.rsvp == "Yes" ? "" : "not "}coming. Dietary restrictions: ${guestData.food} (${guestData.foodDetails}).`;
+    let summaryText = `${guestData.name} is ${guestData.rsvp == "Yes" ? "" : "not "}coming.`
+    if (guestData.rsvp == "Yes") {
+        summaryText += ` Dietary restrictions: ${guestData.food}`;
+        if (guestData.foodDetails != "") {
+            summaryText += ` (${guestData.foodDetails}).`;
+        } else {
+            summaryText += '.';
+        }
+    }
     if (plusOne) {
         summaryText += '<br/>';
-        summaryText += `${plusOneData.name} is ${plusOneData.rsvp == "Yes" ? "" : "not "}coming. Dietary restrictions: ${plusOneData.food} (${plusOneData.foodDetails}).`;
+        summaryText += `${plusOneData.name} is ${plusOneData.rsvp == "Yes" ? "" : "not "}coming.`
+        if (plusOneData.rsvp == "Yes") {
+            summaryText += ` Dietary restrictions: ${plusOneData.food}`;
+            if (plusOneData.foodDetails != "") {
+                summaryText += ` (${plusOneData.foodDetails}).`;
+            } else {
+                summaryText += '.';
+            }
+        }
     }
-    document.getElementById("rsvpSummary").innerHTML = summaryText;
+    document.getElementById("rsvpSummary").innerHTML = '<p>' + summaryText + '</p>';
     document.getElementById("rsvpSuccess").classList.remove("hidden");
 }
 
