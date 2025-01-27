@@ -54,11 +54,11 @@ function displayData(guestData, plusOneData) {
     document.getElementById('fallbackForm').classList.add('hidden');
 }
 
-function showRSVPSummary() {
-    let summaryText = `${cachedData.name} is ${cachedData.rsvp == "Yes" ? "" : "not "}coming. Dietary restrictions: ${cachedData.food} (${cachedData.foodDetails}).`;
+function showRSVPSummary(guestData, plusOneData) {
+    let summaryText = `${guestData.name} is ${guestData.rsvp == "Yes" ? "" : "not "}coming. Dietary restrictions: ${guestData.food} (${guestData.foodDetails}).`;
     if (plusOne) {
         summaryText += '<br/>';
-        summaryText += `${cachedPlusOneData.name} is ${cachedPlusOneData.rsvp == "Yes" ? "" : "not "}coming. Dietary restrictions: ${cachedPlusOneData.food} (${cachedPlusOneData.foodDetails}).`;
+        summaryText += `${plusOneData.name} is ${plusOneData.rsvp == "Yes" ? "" : "not "}coming. Dietary restrictions: ${plusOneData.food} (${plusOneData.foodDetails}).`;
     }
     document.getElementById("rsvpSummary").innerHTML = summaryText;
     document.getElementById("rsvpSuccess").classList.remove("hidden");
@@ -114,12 +114,10 @@ function checkIfHasDataAndShowDataOrForm() {
         const guestData = JSON.parse(cachedData);
         const plusOneData = JSON.parse(cachedPlusOneData);
 
-        console.log(cachedData);
-
         if (guestData.rsvp == "") {
             displayData(guestData, plusOneData);
         } else {
-            showRSVPSummary();
+            showRSVPSummary(guestData, plusOneData);
         }
     } else {
         if (row) {
