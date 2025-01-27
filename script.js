@@ -4,6 +4,7 @@ let plusOne = urlParams.has('plusOne');
 const webAppUrl = 'https://script.google.com/macros/s/AKfycbwDjiFeIRnOak-XqdBLwgY5jyJQpyycC0rKoTFJAcMLZ6QPNEPHy9EuJ6M8q8YDuieklw/exec';
 
 let cachedData = null;
+let cachedPlusOneData = null;
 
 if (row) {
     cachedData = localStorage.getItem('guestData_' + row);
@@ -47,6 +48,15 @@ function displayData(guestData, plusOneData) {
     document.getElementById('fallbackForm').classList.add('hidden');
 }
 
+function showRSVPSummary() {
+    let summaryText = `${cachedData.name} is ${cachedData.rsvp == "Yes" ? "" : "not "}coming. Dietary restrictions: ${cachedData.food} (${cachedData.foodDetails}).`;
+    if (plusOne) {
+        summaryText += '<br/>';
+        summaryText += `${cachedPlusOneData.name} is ${cachedPlusOneData.rsvp == "Yes" ? "" : "not "}coming. Dietary restrictions: ${cachedPlusOneData.food} (${cachedPlusOneData.foodDetails}).`;
+    }
+    document.getElementById("rsvpSummary").innerHTML = summaryText;
+}
+
 function setupFoodDetailsToggle() {
     const mainFoodSelect = document.getElementById("mainFood");
     const mainFoodDetails = document.getElementById("foodDetailsContainer");
@@ -74,6 +84,9 @@ function fetchData(fromUrl) {
             const guestData = { name: data[0][1], rsvp: data[0][3], food: data[0][4], foodDetails: data[0][5] };
             const plusOneData = plusOne && data[1] ? { name: data[1][1], rsvp: data[1][3], food: data[1][4], foodDetails: data[1][5] } : null;
 
+            cachedData = guestData;
+            cachedPlusOneData = plusOneData;
+
             displayData(guestData, plusOneData);
 
             localStorage.setItem('guestData_' + row, JSON.stringify(guestData));
@@ -88,13 +101,10 @@ function fetchData(fromUrl) {
         });
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
-    document.getElementById("loadingMessage").classList.remove("hidden");
-    document.getElementById("mainContent").classList.add("hidden");
-
+function checkAndShowForm() {
     if (cachedData) {
         const guestData = JSON.parse(cachedData);
-        const plusOneData = JSON.parse(localStorage.getItem('guestData_' + (parseInt(row) + 1)));
+        const plusOneData = JSON.parse(cachedPlusOneData);
         displayData(guestData, plusOneData);
     } else {
         if (row) {
@@ -104,24 +114,40 @@ document.addEventListener("DOMContentLoaded", async () => {
             document.getElementById("loadingMessage").classList.add("hidden");
         }
     }
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+    document.getElementById("loadingMessage").classList.remove("hidden");
+    document.getElementById("mainContent").classList.add("hidden");
+
+    checkAndShowForm();
 
     setupFoodDetailsToggle();
 
     document.getElementById("rsvpForm").addEventListener("submit", async (event) => {
         event.preventDefault();
+        document.body.style.cursor = "wait";
+
+        const mainGuestRSVP = document.querySelector('input[name="mainResponse"]:checked').value;
+        const mainGuestFood = document.getElementById("mainFood").value;
+        const mainGuestFoodDetails = document.getElementById("mainFoodDetails").value;
+
+        const plusOneRSVP = document.querySelector('input[name="plusOneResponse"]:checked').value;
+        const plusOneFood = document.getElementById("plusOneFood").value;
+        const plusOneFoodDetails = document.getElementById("plusOneFoodDetails").value;
 
         const postData = new URLSearchParams({
             row: row,
-            response: document.querySelector('input[name="mainResponse"]:checked').value,
-            food: document.getElementById("mainFood").value,
-            foodDetails: document.getElementById("mainFoodDetails").value
+            response: mainGuestRSVP,
+            food: mainGuestFood,
+            foodDetails: mainGuestFoodDetails
         });
 
         if (plusOne) {
             postData.append('plusOneRow', parseInt(row) + 1);
-            postData.append('plusOneResponse', document.querySelector('input[name="plusOneResponse"]:checked').value);
-            postData.append('plusOneFood', document.getElementById("plusOneFood").value);
-            postData.append('plusOneFoodDetails', document.getElementById("plusOneFoodDetails").value);
+            postData.append('plusOneResponse', plusOneRSVP);
+            postData.append('plusOneFood', plusOneFood);
+            postData.append('plusOneFoodDetails', plusOneFoodDetails);
         }
 
         fetch(webAppUrl, {
@@ -133,10 +159,22 @@ document.addEventListener("DOMContentLoaded", async () => {
             .then(response => response.text())
             .then(() => {
                 document.getElementById("rsvpForm").classList.add("hidden");
-                // show success msg
+                cachedData.rsvp = mainGuestRSVP;
+                cachedData.food = mainGuestFood;
+                cachedData.foodDetails = mainGuestFoodDetails;
+                localStorage.setItem('guestData_' + row, JSON.stringify(cachedData));
+                if (plusOne) {
+                    cachedPlusOneData.rsvp = plusOneRSVP;
+                    cachedPlusOneData.food = plusOneFood;
+                    cachedPlusOneData.foodDetails = plusOneFoodDetails;
+                    localStorage.setItem('guestData_' + row, JSON.stringify(cachedPlusOneData));
+                }
+                document.body.style.cursor = "default";
+                showRSVPSummary();
             })
             .catch(error => {
                 console.error('Error posting data:', error);
+                document.body.style.cursor = "default";
                 alert('Failed to submit RSVP.');
             });
     });
@@ -162,8 +200,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     });
 
-    // document.getElementById("changeRsvpButton").addEventListener("click", () => {
-    //     document.getElementById("menu").classList.add("hidden");
-    //     document.getElementById("rsvpForm").classList.remove("hidden");
-    // });
+    document.getElementById("changeRsvpButton").addEventListener("click", () => {
+        document.getElementById("rsvpSuccess").classList.add("hidden");
+        checkAndShowForm();
+        document.getElementById("rsvpForm").classList.remove("hidden");
+    });
 });
