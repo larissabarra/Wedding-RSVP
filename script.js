@@ -8,7 +8,8 @@ let cachedPlusOneData = null;
 
 if (row) {
     cachedData = localStorage.getItem('guestData_' + row);
-    cachedPlusOneData = localStorage.getItem('guestData_' + (row + 1));
+    const plusOneRow = row + 1;
+    cachedPlusOneData = localStorage.getItem('guestData_' + plusOneRow);
     plusOne = cachedPlusOneData != null;
 } else {
     for (let i = 0; i < localStorage.length; i++) {
@@ -16,7 +17,8 @@ if (row) {
         if (key.startsWith('guestData_')) {
             cachedData = localStorage.getItem(key);
             row = key.split('_')[1];
-            cachedPlusOneData = localStorage.getItem('guestData_' + (row + 1));
+            const plusOneRow = row + 1;
+            cachedPlusOneData = localStorage.getItem('guestData_' + plusOneRow);
             plusOne = cachedPlusOneData != null;
             break;
         }
