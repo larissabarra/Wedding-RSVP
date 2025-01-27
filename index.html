@@ -118,8 +118,9 @@
                         </path>
                     </svg>
                 </a>
-                <p>91-95 Clerkenwell Rd, London</p>
-                <p>EC1R 5BX</p>
+                <p>91-95 Clerkenwell Rd, London
+                    <br />EC1R 5BX
+                </p>
                 <h3>Nearest stations</h3>
                 <p>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="25" height="10">
@@ -130,8 +131,7 @@
                         <rect x="40" y="50" width="120" height="1" fill="none" stroke="black" stroke-width="10"></rect>
                     </svg>
                     Chancery Lane, 8min
-                </p>
-                <p>
+                    <br />
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="25" height="10">
                         <!-- Outer Circle -->
                         <circle cx="100" cy="50" r="40" fill="none" stroke="black" stroke-width="10"></circle>
@@ -146,7 +146,7 @@
     </div>
 
     <div id="rsvp" class="page">
-        <h1>RSVP</h1>
+        <h1>Répondez s'il vous plaît</h1>
         <div id="loadingMessage">
             <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <style>
@@ -180,17 +180,23 @@
             </svg>
         </div>
         <div id="fallbackForm" class="hidden">
-            <h1 id="fallbackGreeting">Hello, stranger!</h1>
-            <p>Please enter your name as stated in your invitation.</p>
+            <p>
+                Please enter your name as stated in your invitation.
+                <br />
+                If you're responding for you and a guest, you'll be able to RSVP for both of you.
+            </p>
             <form id="guestFindForm">
-                <label>Name: <input type="text" id="guestName"></label>
+                <input type="text" id="guestName" placeholder="Name">
                 <button type="submit">RSVP</button>
             </form>
         </div>
         <div id="mainContent" class="hidden">
             <h1 id="greeting"></h1>
-            <p>We would be so happy to have you with us for our reception!<br />Please confirm your presence and food
-                restrictions.</p>
+            <p>
+                We would be delighted to have you with us for our reception.
+                <br />
+                Please let us know if you're coming and if you have any dietary restrictions.
+            </p>
             <form id="rsvpForm">
                 <div id="sectionsContainer">
                     <section id="mainGuestSection">
@@ -198,11 +204,17 @@
 
                         <!-- RSVP Radio Buttons -->
                         <div class="radio-group">
-                            <label>Are you coming?</label>
-                            <input type="radio" id="mainRSVPYes" name="mainResponse" value="Yes">
-                            <label for="mainRSVPYes">Yes</label>
-                            <input type="radio" id="mainRSVPNo" name="mainResponse" value="No">
-                            <label for="mainRSVPNo">No</label>
+                            <label class="radio-group__question">Are you coming?</label>
+                            <div class="radio-group__options">
+                                <div class="radio-option">
+                                    <input type="radio" id="mainRSVPYes" name="mainResponse" value="Yes">
+                                    <label for="mainRSVPYes">Yes</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="mainRSVPNo" name="mainResponse" value="No">
+                                    <label for="mainRSVPNo">No</label>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Food Preference Dropdown -->
