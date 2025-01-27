@@ -155,9 +155,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         menuList.classList.toggle('open');
     });
 
-    document.querySelectorAll('.menu a').addEventListener('click', () => {
-        menuList.classList.remove('open');
-    })
+    document.querySelectorAll('.menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            menuList.classList.remove('open');
+        });
+    });
 
     // document.getElementById("changeRsvpButton").addEventListener("click", () => {
     //     document.getElementById("menu").classList.add("hidden");
