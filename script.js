@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     localStorage.setItem('guestData_' + (Number(row) + 1), JSON.stringify(cachedPlusOneData));
                 }
                 document.body.style.cursor = "default";
-                showRSVPSummary();
+                showRSVPSummary(cachedData, cachedPlusOneData);
             })
             .catch(error => {
                 console.error('Error posting data:', error);
