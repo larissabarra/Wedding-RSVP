@@ -147,6 +147,7 @@
 
     <div id="rsvp" class="page">
         <h1>Répondez s'il vous plaît</h1>
+        <p>Please respond by the 16th of April, 2025.</p>
         <div id="loadingMessage">
             <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <style>
@@ -239,11 +240,18 @@
                         <h2 id="plusOneName"></h2>
                         <!-- RSVP Radio Buttons -->
                         <div class="radio-group">
-                            <label>Are you coming?</label>
-                            <input type="radio" id="plusOneRSVPYes" name="plusOneResponse" value="Yes">
-                            <label for="plusOneRSVPYes">Yes</label>
-                            <input type="radio" id="plusOneRSVPNo" name="plusOneResponse" value="No">
-                            <label for="plusOneRSVPNo">No</label>
+                            <label class="radio-group__question">Are you coming?</label>
+                            <div class="radio-group__options">
+                                <div class="radio-option">
+                                    <input type="radio" id="plusOneRSVPYes" name="mainReplusOneResponsesponse"
+                                        value="Yes">
+                                    <label for="plusOneRSVPYes">Yes</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="plusOneRSVPNo" name="plusOneResponse" value="No">
+                                    <label for="plusOneRSVPNo">No</label>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Food Preference Dropdown -->
