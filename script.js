@@ -88,13 +88,11 @@ function setupFoodDetailsToggle() {
         mainFoodDetails.classList.toggle("hidden", !["Allergy", "Other"].includes(mainFoodSelect.value));
     });
 
-    if (plusOne) {
-        const plusOneFoodSelect = document.getElementById("plusOneFood");
-        const plusOneFoodDetails = document.getElementById("plusOneFoodDetailsContainer");
-        plusOneFoodSelect.addEventListener("change", () => {
-            plusOneFoodDetails.classList.toggle("hidden", !["Allergy", "Other"].includes(plusOneFoodSelect.value));
-        });
-    }
+    const plusOneFoodSelect = document.getElementById("plusOneFood");
+    const plusOneFoodDetails = document.getElementById("plusOneFoodDetailsContainer");
+    plusOneFoodSelect.addEventListener("change", () => {
+        plusOneFoodDetails.classList.toggle("hidden", !["Allergy", "Other"].includes(plusOneFoodSelect.value));
+    });
 }
 
 function fetchData(fromUrl) {
@@ -158,11 +156,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const mainGuestRSVP = document.querySelector('input[name="mainResponse"]:checked').value;
         const mainGuestFood = document.getElementById("mainFood").value;
-        const mainGuestFoodDetails = document.getElementById("mainFoodDetails").value;
+        const mainGuestFoodDetails = ["Allergy", "Other"].includes(mainFoodSelect.value) ? document.getElementById("mainFoodDetails").value : "";
 
         const plusOneRSVP = document.querySelector('input[name="plusOneResponse"]:checked').value;
         const plusOneFood = document.getElementById("plusOneFood").value;
-        const plusOneFoodDetails = document.getElementById("plusOneFoodDetails").value;
+        const plusOneFoodDetails = ["Allergy", "Other"].includes(mainFoodSelect.value) ? document.getElementById("plusOneFoodDetails").value : "";
 
         const postData = new URLSearchParams({
             row: row,
@@ -186,7 +184,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         })
             .then(response => response.text())
             .then(() => {
-                document.getElementById("rsvpForm").classList.add("hidden");
+                document.getElementById("mainContent").classList.add("hidden");
                 cachedData.rsvp = mainGuestRSVP;
                 cachedData.food = mainGuestFood;
                 cachedData.foodDetails = mainGuestFoodDetails;
