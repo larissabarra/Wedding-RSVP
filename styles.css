@@ -44,21 +44,28 @@ body {
   padding: 33vh 10vw 20vh 10vw;
 }
 
-.locationContent,
-.welcomeContent {
+#locationContent,
+#welcomeContent {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   justify-content: center;
   align-items: center;
   gap: 3rem;
+}
 
-  &__child {
-    flex: 1 1 48%;
-    max-width: 48%;
-    width: 38%;
-    min-width: 30vw;
-  }
+#locationContent .locationContent__child {
+  flex: 1 1 48%;
+  max-width: 48%;
+  width: 38%;
+  min-width: 30vw;
+}
+
+#welcomeContent .welcomeContent__child {
+  flex: 1 1 48%;
+  max-width: 48%;
+  width: auto;
+  min-width: 30vw;
 }
 
 #map {
