@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     document.getElementById("changeRsvpButton").addEventListener("click", () => {
         document.getElementById("rsvpSuccess").classList.add("hidden");
-        checkAndShowForm();
+        checkIfHasDataAndShowDataOrForm();
         document.getElementById("rsvpForm").classList.remove("hidden");
     });
 });
