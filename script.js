@@ -55,6 +55,7 @@ function displayData(guestData, plusOneData) {
 }
 
 function showRSVPSummary(guestData, plusOneData) {
+    console.log(guestData);
     let summaryText = `${guestData.name} is ${guestData.rsvp == "Yes" ? "" : "not "}coming.`
     if (guestData.rsvp == "Yes") {
         summaryText += ` Dietary restrictions: ${guestData.food}`;
