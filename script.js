@@ -9,6 +9,7 @@ let cachedPlusOneData = null;
 if (row) {
     cachedData = localStorage.getItem('guestData_' + row);
     cachedPlusOneData = localStorage.getItem('guestData_' + (row + 1));
+    plusOne = cachedPlusOneData != null;
 } else {
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
