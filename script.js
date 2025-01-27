@@ -15,10 +15,10 @@ if (row) {
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         if (key.startsWith('guestData_')) {
-            cachedData = localStorage.getItem(key);
+            cachedData = JSON.parse(localStorage.getItem(key));
             row = key.split('_')[1];
             const plusOneRow = Number(row) + 1;
-            cachedPlusOneData = localStorage.getItem('guestData_' + plusOneRow);
+            cachedPlusOneData = JSON.parse(localStorage.getItem('guestData_' + plusOneRow));
             plusOne = cachedPlusOneData != null;
             break;
         }
@@ -127,13 +127,11 @@ function fetchData(fromUrl) {
 function checkIfHasDataAndShowDataOrForm() {
     if (cachedData) {
         document.getElementById("loadingMessage").classList.add("hidden");
-        const guestData = JSON.parse(cachedData);
-        const plusOneData = JSON.parse(cachedPlusOneData);
 
-        if (guestData.rsvp == "") {
-            displayData(guestData, plusOneData);
+        if (cachedData.rsvp == "") {
+            displayData(cachedData, cachedPlusOneData);
         } else {
-            showRSVPSummary(guestData, plusOneData);
+            showRSVPSummary(cachedData, cachedPlusOneData);
         }
     } else {
         if (row) {
@@ -191,12 +189,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                 cachedData.rsvp = mainGuestRSVP;
                 cachedData.food = mainGuestFood;
                 cachedData.foodDetails = mainGuestFoodDetails;
-                localStorage.setItem('guestData_' + row, cachedData);
+                localStorage.setItem('guestData_' + row, JSON.stringify(cachedData));
                 if (plusOne) {
                     cachedPlusOneData.rsvp = plusOneRSVP;
                     cachedPlusOneData.food = plusOneFood;
                     cachedPlusOneData.foodDetails = plusOneFoodDetails;
-                    localStorage.setItem('guestData_' + (Number(row) + 1), cachedPlusOneData);
+                    localStorage.setItem('guestData_' + (Number(row) + 1), JSON.stringify(cachedPlusOneData));
                 }
                 document.body.style.cursor = "default";
                 showRSVPSummary();
@@ -231,9 +229,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     document.getElementById("changeRsvpButton").addEventListener("click", () => {
         document.getElementById("rsvpSuccess").classList.add("hidden");
-        const guestData = JSON.parse(cachedData);
-        const plusOneData = JSON.parse(cachedPlusOneData);
-        displayData(guestData, plusOneData);
+        displayData(cachedData, cachedPlusOneData);
         document.getElementById("rsvpForm").classList.remove("hidden");
     });
 });
