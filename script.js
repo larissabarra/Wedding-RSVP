@@ -32,6 +32,7 @@ function displayData(guestData, plusOneData) {
     document.getElementById('mainFoodDetails').value = guestData.foodDetails;
 
     if (plusOneData) {
+        plusOne = true;
         document.getElementById('plusOneName').textContent = plusOneData.name;
         document.getElementById('plusOneSection').classList.remove('hidden');
         if (document.querySelector(`input[name="plusOneResponse"][value="${plusOneData.rsvp}"]`) != null) {
