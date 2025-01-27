@@ -18,8 +18,10 @@ if (row) {
             cachedData = localStorage.getItem(key);
             row = key.split('_')[1];
             const plusOneRow = row + 1;
+            console.log(plusOneRow);
             cachedPlusOneData = localStorage.getItem('guestData_' + plusOneRow);
             plusOne = cachedPlusOneData != null;
+            console.log(plusOne);
             break;
         }
     }
