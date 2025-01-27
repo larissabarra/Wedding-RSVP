@@ -110,8 +110,11 @@ function fetchData(fromUrl) {
 
 function checkIfHasDataAndShowDataOrForm() {
     if (cachedData) {
+        document.getElementById("loadingMessage").classList.add("hidden");
         const guestData = JSON.parse(cachedData);
         const plusOneData = JSON.parse(cachedPlusOneData);
+
+        console.log(cachedData);
 
         if (guestData.rsvp == "") {
             displayData(guestData, plusOneData);
