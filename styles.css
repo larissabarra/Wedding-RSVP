@@ -44,7 +44,8 @@ body {
   padding: 33vh 10vw 20vh 10vw;
 }
 
-.locationContent {
+.locationContent,
+.welcomeContent {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -64,7 +65,8 @@ body {
   height: 30vh;
 }
 
-#locationInfo {
+#locationInfo,
+#welcomeInfo {
   text-align: left;
 }
 
@@ -76,20 +78,9 @@ body {
   padding: 10px auto;
 }
 
-.welcomeContent {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  gap: 3rem;
 
-  &__child {
-    flex: 1 1 48%;
-    max-width: 48%;
-    width: 38%;
-    min-width: 30vw;
-  }
+.welcomeContent img {
+  max-width: 30vw;
 }
 
 /* Base styles for the menu */
@@ -420,6 +411,10 @@ form select {
       max-width: 100%;
       text-align: center;
     }
+  }
+
+  .welcomeContent img {
+    max-width: 80vw;
   }
 
   #sectionsContainer {
