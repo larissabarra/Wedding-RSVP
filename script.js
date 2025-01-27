@@ -191,12 +191,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                 cachedData.rsvp = mainGuestRSVP;
                 cachedData.food = mainGuestFood;
                 cachedData.foodDetails = mainGuestFoodDetails;
-                localStorage.setItem('guestData_' + row, JSON.stringify(cachedData));
+                localStorage.setItem('guestData_' + row, cachedData);
                 if (plusOne) {
                     cachedPlusOneData.rsvp = plusOneRSVP;
                     cachedPlusOneData.food = plusOneFood;
                     cachedPlusOneData.foodDetails = plusOneFoodDetails;
-                    localStorage.setItem('guestData_' + (row + 1), JSON.stringify(cachedPlusOneData));
+                    localStorage.setItem('guestData_' + (Number(row) + 1), cachedPlusOneData);
                 }
                 document.body.style.cursor = "default";
                 showRSVPSummary();
