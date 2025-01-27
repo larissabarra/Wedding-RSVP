@@ -17,11 +17,9 @@ if (row) {
         if (key.startsWith('guestData_')) {
             cachedData = localStorage.getItem(key);
             row = key.split('_')[1];
-            const plusOneRow = Number(row);
-            console.log(plusOneRow);
+            const plusOneRow = Number(row) + 1;
             cachedPlusOneData = localStorage.getItem('guestData_' + plusOneRow);
             plusOne = cachedPlusOneData != null;
-            console.log(plusOne);
             break;
         }
     }
