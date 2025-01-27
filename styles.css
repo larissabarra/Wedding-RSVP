@@ -79,9 +79,18 @@ body {
   padding: 10px auto;
 }
 
-
 .welcomeContent img {
   max-width: 30vw;
+}
+
+#infoContent {
+  max-width: 70vw;
+  text-align: left;
+}
+
+h3.infoTitle {
+  font-family: 'voga';
+  color: #0f1869;
 }
 
 /* Base styles for the menu */
@@ -143,11 +152,6 @@ body {
   align-items: center;
   justify-content: center;
   margin: 0;
-}
-
-#infoContent {
-  max-width: 70vw;
-  text-align: left;
 }
 
 #sectionsContainer {
