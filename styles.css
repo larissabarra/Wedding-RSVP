@@ -265,6 +265,17 @@ form select {
   text-align: left;
 }
 
+#changeRSVPButton {
+  padding: 10px 20px;
+  font-family: 'voga';
+  font-size: large;
+  letter-spacing: 2px;
+  background: #907c5a;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
 :root {
   --size: 70vw;
   --vertical-size: 8vh;

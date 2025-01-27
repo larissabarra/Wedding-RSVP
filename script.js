@@ -8,12 +8,15 @@ let cachedPlusOneData = null;
 
 if (row) {
     cachedData = localStorage.getItem('guestData_' + row);
+    cachedPlusOneData = localStorage.getItem('guestData_' + (row + 1));
 } else {
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         if (key.startsWith('guestData_')) {
             cachedData = localStorage.getItem(key);
             row = key.split('_')[1];
+            cachedPlusOneData = localStorage.getItem('guestData_' + (row + 1));
+            plusOne = cachedPlusOneData != null;
             break;
         }
     }
@@ -55,6 +58,7 @@ function showRSVPSummary() {
         summaryText += `${cachedPlusOneData.name} is ${cachedPlusOneData.rsvp == "Yes" ? "" : "not "}coming. Dietary restrictions: ${cachedPlusOneData.food} (${cachedPlusOneData.foodDetails}).`;
     }
     document.getElementById("rsvpSummary").innerHTML = summaryText;
+    document.getElementById("rsvpSuccess").classList.remove("hidden");
 }
 
 function setupFoodDetailsToggle() {
@@ -101,11 +105,16 @@ function fetchData(fromUrl) {
         });
 }
 
-function checkAndShowForm() {
+function checkIfHasDataAndShowDataOrForm() {
     if (cachedData) {
         const guestData = JSON.parse(cachedData);
         const plusOneData = JSON.parse(cachedPlusOneData);
-        displayData(guestData, plusOneData);
+
+        if (guestData.rsvp == "") {
+            displayData(guestData, plusOneData);
+        } else {
+            showRSVPSummary();
+        }
     } else {
         if (row) {
             fetchData(`${webAppUrl}?row=${row}&plusOne=${plusOne}`);
@@ -120,7 +129,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("loadingMessage").classList.remove("hidden");
     document.getElementById("mainContent").classList.add("hidden");
 
-    checkAndShowForm();
+    checkIfHasDataAndShowDataOrForm();
 
     setupFoodDetailsToggle();
 
@@ -167,7 +176,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     cachedPlusOneData.rsvp = plusOneRSVP;
                     cachedPlusOneData.food = plusOneFood;
                     cachedPlusOneData.foodDetails = plusOneFoodDetails;
-                    localStorage.setItem('guestData_' + row, JSON.stringify(cachedPlusOneData));
+                    localStorage.setItem('guestData_' + (row + 1), JSON.stringify(cachedPlusOneData));
                 }
                 document.body.style.cursor = "default";
                 showRSVPSummary();
