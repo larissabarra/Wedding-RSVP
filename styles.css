@@ -25,12 +25,24 @@ body {
 }
 
 body {
-  font-family: Arial, sans-serif;
   min-height: 100vh;
   margin: 0;
-  background: url(bg.png) fixed bottom repeat-x;
-  background-size: auto 30%;
+  position: relative;
   font-family: poiret;
+  overflow-x: hidden;
+
+  &:before {
+    content: "";
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: auto;
+    background: url('bg.png') repeat-x;
+    background-size: auto 30vw;
+    z-index: -1;
+    pointer-events: none;
+  }
 }
 
 /* General page styling */
@@ -81,6 +93,7 @@ body {
 
 .welcomeContent img {
   max-width: 30vw;
+  height: auto;
 }
 
 #infoContent {
