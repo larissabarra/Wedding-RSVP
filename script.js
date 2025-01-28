@@ -1,7 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
-let row = urlParams.get('row');
-let plusOne = urlParams.has('plusOne');
-const webAppUrl = 'https://script.google.com/macros/s/AKfycbwDjiFeIRnOak-XqdBLwgY5jyJQpyycC0rKoTFJAcMLZ6QPNEPHy9EuJ6M8q8YDuieklw/exec';
+let row = urlParams.get('r');
+let plusOne = urlParams.has('p');
+const webAppUrl = 'https://script.google.com/macros/s/AKfycbwMW0VHcAIR-c8ryLZ1qyxPMMCUcxxr4GqQWFWEz9fh-Z534qV5cQLjJUEYOCBZ27gdkQ/exec';
 
 let cachedData = null;
 let cachedPlusOneData = null;
@@ -134,7 +134,7 @@ function checkIfHasDataAndShowDataOrForm() {
     } else {
         if (row) {
             console.log()
-            fetchData(`${webAppUrl}?row=${row}&plusOne=${plusOne}`);
+            fetchData(`${webAppUrl}?r=${row}&p=${plusOne}`);
         } else {
             document.getElementById('fallbackForm').classList.remove('hidden');
             document.getElementById("loadingMessage").classList.add("hidden");
