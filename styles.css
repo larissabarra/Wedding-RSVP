@@ -37,8 +37,8 @@ body {
     bottom: 0;
     left: 0;
     width: 100vw;
-    height: auto;
-    background: url('bg.png') repeat-x;
+    height: 100bh;
+    background: url('bg.png') bottom repeat-x;
     background-size: auto 30vw;
     z-index: -1;
     pointer-events: none;
@@ -93,7 +93,7 @@ body {
 
 .welcomeContent img {
   max-width: 30vw;
-  height: auto;
+  object-fit: cover;
 }
 
 #infoContent {
