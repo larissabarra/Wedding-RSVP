@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         fetch(webAppUrl, {
             method: 'POST',
             redirect: 'follow',
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: postData
         })
             .then(response => response.text())
