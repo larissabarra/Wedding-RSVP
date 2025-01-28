@@ -10,7 +10,6 @@ if (row) {
     cachedData = localStorage.getItem('guestData_' + row);
     const plusOneRow = Number(row) + 1;
     cachedPlusOneData = localStorage.getItem('guestData_' + plusOneRow);
-    plusOne = cachedPlusOneData != null;
 } else {
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
@@ -134,6 +133,7 @@ function checkIfHasDataAndShowDataOrForm() {
         }
     } else {
         if (row) {
+            console.log()
             fetchData(`${webAppUrl}?row=${row}&plusOne=${plusOne}`);
         } else {
             document.getElementById('fallbackForm').classList.remove('hidden');
