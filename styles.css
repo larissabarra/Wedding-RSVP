@@ -524,8 +524,8 @@ form select {
 
   .welcomeImageContainer {
     flex: 0 1 80vw;
-    /* Adjust for smaller screens */
     max-width: 90%;
+    align-self: center;
   }
 
   #sectionsContainer {
