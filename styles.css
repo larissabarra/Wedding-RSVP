@@ -46,11 +46,8 @@ body {
     width: 100vw;
     height: 100vh;
     /* Adjusted for better mobile compatibility */
-    background: url('bg.png') bottom repeat-x;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    background: url('bg.png') bottom center repeat-x;
+    background-size: auto 30%;
     background-attachment: fixed;
     z-index: -1;
     pointer-events: none;
@@ -463,6 +460,10 @@ form select {
 
 /* Responsive behavior for mobile */
 @media (max-width: 600px) {
+
+  body::before {
+    background-attachment: scroll;
+  }
 
   .menu-toggle {
     display: block !important;
