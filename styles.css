@@ -118,8 +118,9 @@ textarea {
 }
 
 #welcomeContent img {
-  max-width: 30vw;
-  object-fit: cover;
+  max-width: 30vw !important;
+  object-fit: contain;
+  height: auto;
   aspect-ratio: 1658 / 1644;
   align-self: flex-start;
   flex-shrink: 0;
