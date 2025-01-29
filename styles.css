@@ -120,6 +120,7 @@ textarea {
 .welcomeContent img {
   max-width: 30vw;
   object-fit: cover;
+  aspect-ratio: 1658 / 1644;
 }
 
 #infoContent {
