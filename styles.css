@@ -117,7 +117,25 @@ textarea {
   padding: 10px auto;
 }
 
-#welcomeContent img {
+.welcomeImageContainer {
+  flex: 0 1 30vw;
+  /* Prevents stretching */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 45%;
+  min-width: 200px;
+  /* Ensures it doesn't shrink too much */
+}
+
+/* Image itself */
+.welcomeImage {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* #welcomeContent img {
   flex: 0 1 30vw;
   max-width: 30vw !important;
   object-fit: contain;
@@ -126,7 +144,7 @@ textarea {
   align-self: flex-start;
   flex-shrink: 0;
   display: block;
-}
+} */
 
 #infoContent {
   max-width: 60vw;
@@ -510,10 +528,17 @@ form select {
     text-align: center;
   }
 
+  .welcomeImageContainer {
+    flex: 0 1 80vw;
+    /* Adjust for smaller screens */
+    max-width: 90%;
+  }
+
+  /* 
   .welcomeContent img {
     max-width: 80vw;
     height: auto;
-  }
+  } */
 
   #sectionsContainer {
     flex-direction: column;
