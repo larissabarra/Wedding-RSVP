@@ -1,11 +1,11 @@
 @font-face {
   font-family: voga;
-  src: url(VogaMedium.ttf);
+  src: url(VogaMedium.ttf) format('truetype');
 }
 
 @font-face {
   font-family: poiret;
-  src: url(PoiretOne-Regular.ttf);
+  src: url(PoiretOne-Regular.ttf) format('truetype');
 }
 
 /* Reset styles */
@@ -14,14 +14,19 @@
   padding: 0;
   box-sizing: border-box;
   line-height: 2em;
+  -webkit-tap-highlight-color: transparent;
+  /* Removes tap highlight on mobile */
 }
 
-/* Body and html to ensure full height */
+/* Ensure smooth scrolling behavior on all devices */
 html,
 body {
   height: 100%;
   scroll-behavior: smooth;
-  /* Enables smooth scrolling */
+  -webkit-text-size-adjust: 100%;
+  /* Prevents iOS from resizing text */
+  touch-action: manipulation;
+  /* Improves tap response on buttons */
 }
 
 body {
@@ -30,6 +35,8 @@ body {
   position: relative;
   font-family: poiret;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 
   &:before {
     content: '';
@@ -37,12 +44,28 @@ body {
     bottom: 0;
     left: 0;
     width: 100vw;
-    height: 100bh;
+    height: 30vh;
+    /* Adjusted for better mobile compatibility */
     background: url('bg.png') bottom repeat-x;
-    background-size: auto 30vw;
+    background-size: auto 100%;
+    background-attachment: fixed;
+    /* Ensures consistency on Safari */
     z-index: -1;
     pointer-events: none;
   }
+}
+
+/* Make buttons and form elements more touch-friendly */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 16px;
+  /* Prevents iOS zooming on input fields */
+  -webkit-appearance: none;
+  /* Standardizes appearance across browsers */
+  appearance: none;
 }
 
 /* General page styling */
@@ -56,6 +79,7 @@ body {
   padding: 33vh 10vw 20vh 10vw;
 }
 
+/* Ensure smooth flexbox behavior on older browsers */
 #locationContent,
 #welcomeContent {
   display: flex;
@@ -64,6 +88,8 @@ body {
   justify-content: center;
   align-items: center;
   gap: 3rem;
+  min-width: 0;
+  /* Ensures flex children behave consistently */
 }
 
 #locationContent .locationContent__child,
@@ -228,11 +254,14 @@ form select {
   font-family: 'poiret';
 }
 
+/* Improved form and radio button behavior */
 .radio-group {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 2rem;
+  flex-wrap: wrap;
+  /* Ensures proper alignment on smaller screens */
 }
 
 .radio-group__question {
@@ -242,10 +271,10 @@ form select {
 }
 
 .radio-group__options {
-  flex: 1;
-  display: flex;
   flex-direction: column;
+  display: flex;
   gap: 0.5rem;
+  flex: 1;
 }
 
 .radio-option {
@@ -416,14 +445,13 @@ form select {
   }
 }
 
-/* Responsive behavior */
+/* Responsive behavior for mobile */
 @media (max-width: 600px) {
 
   .menu-toggle {
     display: block !important;
   }
 
-  /* Hide the menu items initially and show the toggle button */
   .menu ul {
     display: none;
     flex-direction: column;
