@@ -462,6 +462,8 @@ form select {
 @media (max-width: 600px) {
 
   body::before {
+    height: 30vh;
+    background-size: contain;
     background-attachment: scroll;
   }
 
