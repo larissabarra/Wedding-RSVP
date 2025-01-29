@@ -121,6 +121,7 @@ textarea {
   max-width: 30vw;
   object-fit: cover;
   aspect-ratio: 1658 / 1644;
+  align-self: flex-start;
 }
 
 #infoContent {
