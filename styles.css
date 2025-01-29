@@ -124,6 +124,7 @@ textarea {
   aspect-ratio: 1658 / 1644;
   align-self: flex-start;
   flex-shrink: 0;
+  display: block;
 }
 
 #infoContent {
@@ -504,7 +505,7 @@ form select {
 
   #welcomeContent .welcomeContent__child {
     flex: 1 1 100%;
-    max-width: 100%;
+    max-width: 100% !important;
     text-align: center;
   }
 
