@@ -7,9 +7,9 @@ let cachedData = null;
 let cachedPlusOneData = null;
 
 if (row) {
-    cachedData = localStorage.getItem('guestData_' + row);
+    cachedData = JSON.parse(localStorage.getItem('guestData_' + row));
     const plusOneRow = Number(row) + 1;
-    cachedPlusOneData = localStorage.getItem('guestData_' + plusOneRow);
+    cachedPlusOneData = JSON.parse(localStorage.getItem('guestData_' + plusOneRow));
 } else {
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
