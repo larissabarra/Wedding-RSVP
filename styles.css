@@ -61,10 +61,6 @@ select,
 textarea {
   font-family: inherit;
   font-size: 16px;
-  /* Prevents iOS zooming on input fields */
-  -webkit-appearance: none;
-  /* Standardizes appearance across browsers */
-  appearance: none;
 }
 
 /* General page styling */
