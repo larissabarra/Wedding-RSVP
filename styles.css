@@ -119,19 +119,16 @@ textarea {
 
 .welcomeImageContainer {
   flex: 0 1 30vw;
-  /* Prevents stretching */
   display: flex;
   justify-content: center;
   align-items: flex-start;
   max-width: 45%;
   min-width: 200px;
-  /* Ensures it doesn't shrink too much */
 }
 
-/* Image itself */
 .welcomeImage {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 100vh;
+  max-height: 100vh;
   height: auto;
   object-fit: contain;
 }
