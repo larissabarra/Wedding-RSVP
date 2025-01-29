@@ -44,10 +44,10 @@ body {
     bottom: 0;
     left: 0;
     width: 100vw;
-    height: 30vh;
+    height: 100vh;
     /* Adjusted for better mobile compatibility */
     background: url('bg.png') bottom repeat-x;
-    background-size: auto 100%;
+    background-size: auto 30%;
     background-attachment: fixed;
     /* Ensures consistency on Safari */
     z-index: -1;
