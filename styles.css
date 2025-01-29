@@ -117,11 +117,12 @@ textarea {
   padding: 10px auto;
 }
 
-.welcomeContent img {
+#welcomeContent img {
   max-width: 30vw;
   object-fit: cover;
   aspect-ratio: 1658 / 1644;
   align-self: flex-start;
+  flex-shrink: 0;
 }
 
 #infoContent {
