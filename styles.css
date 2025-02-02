@@ -212,6 +212,7 @@ h3.infoTitle {
 
 #sectionsContainer section {
   flex: 1;
+  max-width: 45%;
 }
 
 h1,
@@ -532,6 +533,7 @@ form select {
 
   #sectionsContainer section {
     width: 60vw;
+    max-width: 100%;
   }
 
   #infoContent {
