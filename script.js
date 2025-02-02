@@ -1,7 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 let row = urlParams.get('r');
 let plusOne = urlParams.has('p');
-const webAppUrl = 'https://script.google.com/macros/s/AKfycby16XyMfcWu56ZTfXvho9Bob1XWnkpq4x71n68CzIgCSVPZwUjtfRPZsdhPaPRwTorojg/exec';
+const webAppUrl = 'https://script.google.com/macros/s/AKfycbyCTwiwHB2Dq64S_iFckTmztCYsRkVzkDxkMtD5KnhXDhS2bMQVPUH0C7z9BE8nWfHawg/exec';
 
 let cachedData = null;
 let cachedPlusOneData = null;
@@ -117,8 +117,9 @@ function fetchData(fromUrl) {
         })
         .catch(error => {
             console.error('Error fetching data:', error);
-            document.getElementById('greeting').textContent = 'Failed to load data.';
-            document.getElementById('loadingMessage').style.display = 'none';
+            document.getElementById('tryAgain').classList.remove("hidden");
+            document.getElementById('fallbackForm').classList.remove("hidden");
+            document.getElementById('loadingMessage').classList.add("hidden");
         });
 }
 
@@ -214,6 +215,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("guestFindForm").addEventListener("submit", async (event) => {
         event.preventDefault();
         document.getElementById('fallbackForm').classList.add('hidden');
+        document.getElementById('tryAgain').classList.add("hidden");
         document.getElementById("loadingMessage").classList.remove("hidden");
 
         fetchData(`${webAppUrl}?name=${document.getElementById("guestName").value}`);
