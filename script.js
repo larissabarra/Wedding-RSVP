@@ -156,18 +156,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.body.style.cursor = "wait";
 
         const mainGuestRSVP = document.querySelector('input[name="mainResponse"]:checked').value;
+        if (mainGuestRSVP == null) {
+            alert('Please select your RSVP.');
+        }
         let mainGuestFood = document.getElementById("mainFood").value;
         if (mainGuestFood == "") {
             mainGuestFood = "None";
         }
         const mainGuestFoodDetails = ["Allergy", "Other"].includes(mainGuestFood) ? document.getElementById("mainFoodDetails").value : "";
-
-        const plusOneRSVP = document.querySelector('input[name="plusOneResponse"]:checked').value;
-        let plusOneFood = document.getElementById("plusOneFood").value;
-        if (plusOneFood == "") {
-            plusOneFood = "None";
-        }
-        const plusOneFoodDetails = ["Allergy", "Other"].includes(plusOneFood) ? document.getElementById("plusOneFoodDetails").value : "";
 
         const postData = new URLSearchParams({
             row: row,
@@ -177,6 +173,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         if (plusOne) {
+            const plusOneRSVP = document.querySelector('input[name="plusOneResponse"]:checked').value;
+            if (mainGuestRSVP == null) {
+                alert('Please select your RSVP.');
+            }
+            let plusOneFood = document.getElementById("plusOneFood").value;
+            if (plusOneFood == "") {
+                plusOneFood = "None";
+            }
+            const plusOneFoodDetails = ["Allergy", "Other"].includes(plusOneFood) ? document.getElementById("plusOneFoodDetails").value : "";
+
             postData.append('plusOneRow', parseInt(row) + 1);
             postData.append('plusOneResponse', plusOneRSVP);
             postData.append('plusOneFood', plusOneFood);
