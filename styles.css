@@ -246,6 +246,10 @@ form button[type="submit"] {
   cursor: pointer;
 }
 
+button[type="submit"]:active {
+  background: #ccaf7c;
+}
+
 /* General form layout */
 form label {
   font-size: 0.9em;
