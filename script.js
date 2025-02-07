@@ -172,16 +172,19 @@ document.addEventListener("DOMContentLoaded", async () => {
             foodDetails: mainGuestFoodDetails
         });
 
+        let plusOneRSVP = null;
+        let plusOneFood = null;
+        let plusOneFoodDetails = null;
         if (plusOne) {
-            const plusOneRSVP = document.querySelector('input[name="plusOneResponse"]:checked').value;
-            if (mainGuestRSVP == null) {
+            plusOneRSVP = document.querySelector('input[name="plusOneResponse"]:checked').value;
+            if (plusOneRSVP == null) {
                 alert('Please select your RSVP.');
             }
-            let plusOneFood = document.getElementById("plusOneFood").value;
+            plusOneFood = document.getElementById("plusOneFood").value;
             if (plusOneFood == "") {
                 plusOneFood = "None";
             }
-            const plusOneFoodDetails = ["Allergy", "Other"].includes(plusOneFood) ? document.getElementById("plusOneFoodDetails").value : "";
+            plusOneFoodDetails = ["Allergy", "Other"].includes(plusOneFood) ? document.getElementById("plusOneFoodDetails").value : "";
 
             postData.append('plusOneRow', parseInt(row) + 1);
             postData.append('plusOneResponse', plusOneRSVP);
