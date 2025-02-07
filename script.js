@@ -197,6 +197,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         })
             .then(response => response.text())
             .then(() => {
+                document.body.style.cursor = "default";
                 document.getElementById("mainContent").classList.add("hidden");
                 cachedData.rsvp = mainGuestRSVP;
                 cachedData.food = mainGuestFood;
