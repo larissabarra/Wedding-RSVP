@@ -1,7 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 let row = urlParams.get('r');
 let plusOne = urlParams.has('p');
-const webAppUrl = 'https://script.google.com/macros/s/AKfycbwqbtDULWzQ3DIIcGn2HTTVhS3nRkW2ATINstDe7TpHQT17MmS2kUc0dSrBxgzkIreA0gg/exec';
+const webAppUrl = 'https://script.google.com/macros/s/AKfycbz3PBSJ9AzQRXMvNH8-s07EbS9AbqVb-Jhvfe-PzWQqHZsT0z1La2pqwPq85piFaw5eTg/exec';
 
 let cachedData = null;
 let cachedPlusOneData = null;
@@ -95,7 +95,13 @@ function setupFoodDetailsToggle() {
 }
 
 function fetchData(fromUrl) {
-    fetch(fromUrl)
+    fetch(fromUrl, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
         .then(response => response.json())
         .then(data => {
             if (row == null) {
