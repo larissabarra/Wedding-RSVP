@@ -263,6 +263,9 @@ xhr.open('GET', 'https://brownbomiphotography.pixieset.com/larissaandalex/');
 xhr.onreadystatechange = handler;
 xhr.responseType = 'blob';
 xhr.setRequestHeader('X-Frame-Options', 'ALLOW-FROM origin');
+xhr.setRequestHeader('Access-Control-Allow-Origin', 'https://larissais.online');
+xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST');
+xhr.setRequestHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 xhr.send();
 
 function handler() {
