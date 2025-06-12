@@ -232,8 +232,14 @@ p {
 }
 
 .superTitle {
-  font-size: xx-large;
+  font-size: 3em;
+  font-weight: bold;
+  color: #c9b05e;
+  text-align: center;
+  margin: 0 auto;
 }
+
+#gallery {}
 
 form {
   z-index: 1;
