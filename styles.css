@@ -231,6 +231,10 @@ p {
   padding-bottom: 15px;
 }
 
+.superTitle {
+  font-size: xx-large;
+}
+
 form {
   z-index: 1;
 }
