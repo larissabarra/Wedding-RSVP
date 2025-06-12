@@ -275,7 +275,7 @@ function handler() {
             var data_url = URL.createObjectURL(this.response);
             document.querySelector('#gallery').src = data_url;
         } else {
-            console.error('no pdf :(');
+            console.error(this.status);
         }
     }
 }
