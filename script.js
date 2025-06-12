@@ -256,26 +256,3 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("rsvpForm").classList.remove("hidden");
     });
 });
-
-var xhr = new XMLHttpRequest();
-
-xhr.open('GET', 'https://brownbomiphotography.pixieset.com/larissaandalex/');
-xhr.onreadystatechange = handler;
-xhr.responseType = 'blob';
-xhr.setRequestHeader('X-Frame-Options', 'ALLOW-FROM origin');
-xhr.setRequestHeader('Access-Control-Allow-Origin', 'https://larissais.online');
-xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST');
-xhr.setRequestHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-xhr.send();
-
-function handler() {
-    if (this.readyState === this.DONE) {
-        if (this.status === 200) {
-            // this.response is a Blob, because we set responseType above
-            var data_url = URL.createObjectURL(this.response);
-            document.querySelector('#gallery').src = data_url;
-        } else {
-            console.error(this.status);
-        }
-    }
-}
